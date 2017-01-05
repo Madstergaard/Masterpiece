@@ -1,0 +1,9 @@
+***Template***
+firstL -- 2016-12-Date Time
+	What was accomplished
+
+Group -- 2017-1-5 2:05pm-2:50pm
+	Contined formulating Design pdf. Breakthroughs included:
+	- Database organization
+  - API selection
+	- Timeline
