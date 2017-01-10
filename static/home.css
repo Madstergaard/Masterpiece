@@ -1,8 +1,29 @@
 @import url('https://fonts.googleapis.com/css?family=Raleway:200,700');
 
+#slide1 {
+    bottom: 50%;
+    transform: translateY(45%);
+}
+
+#slide2 {
+    bottom: 50%;
+    transform: translateY(30%);
+}
+
+#slide3 {
+    bottom: 50%;
+    transform: translateY(35%);
+}
+
+.feature {
+    font-size: 4em;
+}
 
 h1 {
     color: white;
+    font-size: 4.5em;
+    border-color: white;
+    font-family: 'Raleway', sans-serif;
 }
 
 .btn {
@@ -41,7 +62,7 @@ h1 {
     background-color: forestgreen; 
 }
 
-p{
+#typing{
     color: black;
     white-space: nowrap;
     overflow: hidden;
@@ -58,7 +79,7 @@ p:nth-child(2){
   animation: type2 8s steps(60, end);
 }
 
-span{
+#blinker {
   animation: blink 1s infinite;
 }
 
