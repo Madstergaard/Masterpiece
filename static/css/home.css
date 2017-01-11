@@ -1,0 +1,171 @@
+@import url('https://fonts.googleapis.com/css?family=Raleway:200,700');
+
+#slide1 {
+    bottom: 50%;
+    transform: translateY(45%);
+}
+
+#slide2 {
+    bottom: 50%;
+    transform: translateY(30%);
+}
+
+#slide3 {
+    bottom: 50%;
+    transform: translateY(35%);
+}
+
+.feature {
+    font-size: 4.5em;
+    color: #031552;
+}
+
+.car-txt {
+    color: white;
+    font-size: 4.5em;
+    border-color: white;
+    font-family: 'Raleway', sans-serif;
+}
+
+.btn {
+    margin: .5em;
+    border-radius: 10px;
+}
+
+.b1 {
+    color: black;
+    border: 1px solid grey;
+    background-color: white;
+    font-family: 'Raleway', sans-serif;
+    border-width: 1px;
+}
+
+.b1:hover {
+    color: white;
+    border-color: white;
+    background-color: black; 
+}
+
+#b2 {
+    margin-right: 1em;
+    margin-left: .25em;
+    color: white;
+    border-color: #4CAF50;
+    background-color: #4CAF50; 
+    font-family: 'Raleway', sans-serif;
+}
+
+#b2:hover {
+    margin-right: 1em;
+    margin-left: .25em;
+    color: white;
+    border-color: forestgreen;
+    background-color: forestgreen; 
+}
+
+#typing{
+    color: black;
+    white-space: nowrap;
+    overflow: hidden;
+    width: 30em;
+    animation: type 4s steps(60, end); 
+    font-family: 'Raleway', sans-serif;
+}
+
+.carousel-inner {
+    height: 710px;
+}
+
+p:nth-child(2){
+  animation: type2 8s steps(60, end);
+}
+
+#blinker {
+  animation: blink 1s infinite;
+}
+
+@keyframes type{ 
+  from { width: 0; } 
+} 
+
+@keyframes type2{
+  0%{width: 0;}
+  50%{width: 0;}
+  100%{ width: 100; } 
+} 
+
+@keyframes blink{
+  to{opacity: .0;}
+}
+
+::selection{
+  background: black;
+}
+
+.btn-modal {
+    background-color: white;
+    border-color: white;
+    font-size: 1.5em;
+    padding: 0px;
+    margin: 0px;
+    margin-right: .5em;
+}
+
+.btn-modal:hover {
+    color: grey;
+}
+
+.form-field {
+    color: black;
+    font-weight: bold;
+    border-left-color: transparent;
+    border-right-color: transparent;
+    border-top-color: transparent;
+    width: 100%;
+    background-color: transparent;
+    height: 3em;
+    border-bottom: 1px solid black;
+}
+
+.modal-content {
+    border-radius: 2px;
+}
+
+.alt {
+    background-color: #F7F7F7;
+}
+
+.des-box {
+    padding-top: 1.5em;
+    padding-bottom: 3.5em;
+}
+
+.fadeInBlock {
+    opacity:0;
+}
+
+blockquote {
+  background: #f9f9f9;
+  border-left: 10px solid #ccc;
+  margin: 1.5em 10px;
+  padding: 0.5em 10px;
+  quotes: "\201C""\201D""\2018""\2019";
+    width: 25%;
+}
+blockquote:before {
+  color: #031552;
+  content: open-quote;
+  font-size: 4em;
+  line-height: 0.1em;
+  margin-right: 0.25em;
+  vertical-align: -0.4em;
+}
+
+blockquote p {
+  display: inline;
+}
+
+.blockquote-footer {
+    color: #031552;
+    text-align: right;
+}

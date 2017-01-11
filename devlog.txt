@@ -7,3 +7,10 @@ Group -- 2017-1-5 2:05pm-2:50pm
 	- Database organization
   - API selection
 	- Timeline
+
+nancyC -- 2017-01-10 20:00
+	good start for home.html
+	-added javascript animations
+	-carousel slideshow works
+	-integrated login function to buttons
+		-but doesn’t work because no secret_key?
