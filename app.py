@@ -2,7 +2,7 @@ from flask import Flask, render_template, session, redirect, url_for, request
 from utils import accounts, initTables, docs, info
 
 app = Flask(__name__)
-app.secret_key = ''
+app.secret_key = '95c7fbca92ac5083afda62a564a3d014fc3b72c9140e3cb99ea6bf12'
 
 @app.route("/", methods = ['GET', 'POST'])
 def login():
@@ -29,7 +29,7 @@ def login():
 
     return render_template('login.html', msg = msg)
 
-@app.route("/logout")
+@app.route("/logout/")
 def logout():
     session.pop('username')
     return redirect(url_for("login"))
@@ -37,6 +37,7 @@ def logout():
 @app.route("/home/", methods = ['GET'])
 def home():
     return render_template('home.html')
+
 
 if __name__ == "__main__":
     app.debug = True
