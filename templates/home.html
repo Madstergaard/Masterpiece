@@ -10,7 +10,7 @@
     <!-- Bootstrap -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-    <link rel="stylesheet" href="../static/home.css">
+    <link rel="stylesheet" href="../static/css/home.css">
       
   </head>
   <body>
@@ -69,7 +69,8 @@
 </div>
 
 <!--ABOUT-->
-    <div class="container-fluid text-center des-box fadeInBlock">
+    <div class="container-fluid text-center fadeInBlock">
+        <br><br>
       <h1 class="display-3"><b><center>what is masterpiece?</center></b></h1>
         <center> 
             <blockquote>
@@ -77,6 +78,7 @@
                   <b><footer class="blockquote-footer"><cite title="Source Title">a very smart person</cite></footer></b>
             </blockquote>
         </center>
+        <br><br>
     </div>
 
 <!--FEATURES-->
@@ -181,26 +183,6 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-    <script>
-    // Load this when the DOM is ready
-    $(function(){
-      $('#myCarousel').carousel();
-    });
-    </script>
-    <script> 
-        $(function() {
-        $(window).scroll( function(){
-        $('.fadeInBlock').each( function(i){
-            var bottom_of_object = $(this).position().top + $(this).outerHeight();
-            var bottom_of_window = $(window).scrollTop() + $(window).height();
-            /* Adjust the "200" to either have a delay or that the content starts fading a bit before you reach it  */
-            bottom_of_window = bottom_of_window + 25;  
-            if( bottom_of_window > bottom_of_object ){
-                $(this).animate({'opacity':'1'},500);   
-                    }
-                }); 
-            });
-        });
-    </script>
+    <script src="../static/js/home.js"></script>
   </body>
 </html>
