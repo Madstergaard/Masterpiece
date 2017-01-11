@@ -27,7 +27,7 @@ def login():
             else:
                 msg = 'User already exists'
 
-    return render_template('login.html', msg = msg)
+    return render_template('home.html', msg = msg)
 
 @app.route("/logout")
 def logout():

@@ -11,49 +11,46 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
     <link rel="stylesheet" href="../static/home.css">
-
-
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
+      
   </head>
   <body>
-          <nav class="navbar navbar-default navbar-fixed-top">
-            <div class="container-fluid">
-                    <ul class="nav navbar-nav navbar-left">
-                        <li> <a class="navbar-brand" href="home.html"> 
-                            <p id="typing"> <b> masterpiece: </b> write, beautifully.<span id="blinker">|</span></p> 
-                            
-                            </a> </li>
-                    </ul>
-                    <ul class="nav navbar-nav navbar-right">
-                        <button type="button" class="btn" id="b1">Sign Up</button>
-                        <button type="button" class="btn" id="b2">Login</button>
-                    </ul>
-              </div>
-          </nav> 
-          
+
+<!--NAV BAR-->
+      <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container-fluid">
+            <ul class="nav navbar-nav navbar-left">
+                <li> <a class="navbar-brand" href="home.html"> 
+                    <p id="typing"> <b> masterpiece: </b> write, beautifully.<span id="blinker">|</span></p> 
+                    </a> </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <!--SIGN IN BUTTON-->
+                <button type="button" class="btn b1" data-toggle="modal" data-target="#signup">Sign Up</button>
+                <!--LOGIN BUTTON-->
+                <button type="button" class="btn" id="b2" data-toggle="modal" data-target="#login">Login</button>
+            </ul>
+         </div>
+      </nav> 
+
+<!--CAROUSEL-->
     <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
       <div class="carousel-inner" role="listbox">
         <div class="item active">
           <img class="d-block img-fluid" src="../static/1.jpg" alt="First slide">
             <div id="slide1" class="carousel-caption d-none d-md-block">
-                <bold><h1><span class="glyphicon glyphicon-flash" aria-hidden="true"></span><br>brainstorm </h1> </bold>
+                <bold><h1 class="car-txt"><span class="glyphicon glyphicon-flash" aria-hidden="true"></span><br>brainstorm </h1> </bold>
             </div>
         </div>
         <div class="item">
           <img class="d-block img-fluid" src="../static/2.jpg" alt="Second slide">
             <div id="slide2" class="carousel-caption d-none d-md-block">
-                <bold><h1><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span><br>write </h1> </bold>
+                <bold><h1 class="car-txt"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span><br>write </h1> </bold>
             </div>
         </div>
         <div class="item">
           <img class="d-block img-fluid" src="../static/3.jpg" alt="Third slide">
             <div id="slide2" class="carousel-caption d-none d-md-block">
-               <bold><h1><span class="glyphicon glyphicon-repeat" aria-hidden="true"></span><br>repeat </h1></bold>
+               <bold><h1 class="car-txt"><span class="glyphicon glyphicon-repeat" aria-hidden="true"></span><br>repeat </h1></bold>
             </div>
         </div>
       </div>
@@ -69,55 +66,117 @@
         <span class="sr-only">Next</span>
       </a>
     -->
+</div>
+
+<!--ABOUT-->
+    <div class="container-fluid text-center des-box fadeInBlock">
+      <h1 class="display-3"><b><center>what is masterpiece?</center></b></h1>
+        <center> 
+            <blockquote>
+                <p>Google Docs™ on steroids.</p>
+                  <b><footer class="blockquote-footer"><cite title="Source Title">a very smart person</cite></footer></b>
+            </blockquote>
+        </center>
     </div>
-      
-<div class="container-fluid">
-  <h2><b><center>what we do</center></b></h2>
-  <p><center>
-      brief description
-  </center></p>
-    
-<div class="container-fluid text-center">
-      <h2><b>our features</b></h2>
+
+<!--FEATURES-->
+<div class="alt">
+    <div class="container-fluid text-center des-box fadeInBlock">
+      <h1><b>our features</b></h1>
       <h4></h4>
       <br>
         <div class="col-sm-4">
           <span class="glyphicon glyphicon-file feature"></span>
-          <h4>google docs</h4>
+          <h4>Google Docs™</h4>
           <p> brief description</p>
         </div>
         <div class="col-sm-4">
           <span class="glyphicon glyphicon-comment feature"></span>
-          <h4>personal chatbot</h4>
+          <h4>Personal Chatbot</h4>
           <p>brief description</p>
         </div>
         <div class="col-sm-4">
           <span class="glyphicon glyphicon-remove feature"></span>
-          <h4>anti-procrastination</h4>
+          <h4>Anti-Procrastination</h4>
           <p>brief description</p>
         </div>
+      </div>
 </div>
-    
-<div class="container-fluid text-center">
-  <h2><b>who we are</b></h2>
-    <br>
-    <div class="col-sm-4">
-      <img src="../static/jy.jpg" class="img-circle" height="150px" width="150px">
-      <h4>jessica yang</h4>
-      <p>brief description </p>
-    </div>
-    <div class="col-sm-4">
-      <img src="../static/mo.jpg" class="img-circle" height="150px" width="150px">
-      <h4>maddie ostergaard</h4>
-      <p>brief description</p>
-    </div>
-    <div class="col-sm-4">
-      <img src="../static/nc.jpg" class="img-circle" height="150px" width="150px">
-      <h4>nancy cao</h4>
-      <p>brief description</p>
-    </div>
-  </div>    
-    
+      
+<!--ABOUT US-->    
+    <div class="container-fluid text-center des-box fadeInBlock">
+      <h1><b>who we are</b></h1>
+        <br>
+        <div class="col-sm-4">
+          <img src="../static/jy.jpg" class="img-circle" height="150px" width="150px">
+          <h4>Jessica Yang</h4>
+          <p>brief description </p>
+        </div>
+        <div class="col-sm-4">
+          <img src="../static/mo.jpg" class="img-circle" height="150px" width="150px">
+          <h4>Maddie Ostergaard</h4>
+          <p>brief description</p>
+        </div>
+        <div class="col-sm-4">
+          <img src="../static/nc.jpg" class="img-circle" height="150px" width="150px">
+          <h4>Nancy Cao</h4>
+          <p>brief description</p>
+        </div>
+        <br><br><br>
+      </div>  
+      
+<!--SIGN UP MODAL-->
+      <div class="modal fade" id="signup">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+              <h4 class="modal-title" id="myModalLabel">Sign Up</h4>
+            </div>
+            <div class="modal-body">
+              <!--sign up form-->
+              <form action="/" method="POST">
+                <input class="form-field" placeholder="Username" type="text" name="user">
+                <br>
+                <input class="form-field" placeholder="Password" type="password" name="pass">
+                <hr>
+                  <div class=text-right>
+                      <input type="submit" name="register" value="➔" class="btn btn-modal">
+                  </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+<!--LOGIN MODAL-->
+      <div class="modal fade" id="login">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+              <h4 class="modal-title" id="myModalLabel">Login</h4>
+            </div>
+            <div class="modal-body">
+              <!--login form-->
+              <form action="/" method="POST">
+                <input class="form-field" placeholder="Username" type="text" name="user">
+                <br>
+                <input class="form-field" placeholder="Password" type="password" name="pass">
+                <hr>
+                  <div class=text-right>
+                    <input type="submit" name="login" value="➔" class="btn btn-modal">
+                  </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
@@ -127,6 +186,21 @@
     $(function(){
       $('#myCarousel').carousel();
     });
+    </script>
+    <script> 
+        $(function() {
+        $(window).scroll( function(){
+        $('.fadeInBlock').each( function(i){
+            var bottom_of_object = $(this).position().top + $(this).outerHeight();
+            var bottom_of_window = $(window).scrollTop() + $(window).height();
+            /* Adjust the "200" to either have a delay or that the content starts fading a bit before you reach it  */
+            bottom_of_window = bottom_of_window + 25;  
+            if( bottom_of_window > bottom_of_object ){
+                $(this).animate({'opacity':'1'},500);   
+                    }
+                }); 
+            });
+        });
     </script>
   </body>
 </html>
