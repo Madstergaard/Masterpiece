@@ -12,6 +12,9 @@ body {
     right: .7em;
 }
 
+form {
+    display: inline-block; 
+}
 
 .nav2 {
     border: 0em;
