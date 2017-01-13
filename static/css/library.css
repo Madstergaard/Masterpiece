@@ -33,9 +33,10 @@ form {
 }
 
 h1 {
+    font-size: 4em;
     font-family: 'Raleway', sans-serif;
-    margin-top: .75em;
-    margin-bottom: .65em;
+    margin-top: .5em;
+    margin-bottom: .35em;
 }
 
 /*Bookshelf Bookelement*/

@@ -14,3 +14,8 @@ nancyC -- 2017-01-10 20:00
 	-carousel slideshow works
 	-integrated login function to buttons
 		-but doesn’t work because no secret_key?
+
+nancyC -- 2017-01-13 15:00
+       completed basic foundation for library.html
+       need to incoorperate jinja2 code when database has stories
+       	    -inputs: name, description, url to image, author name
