@@ -26,7 +26,6 @@ def login():
                 msg = 'Successfully logged in'
             else:
                 msg = 'User already exists'
-
     return render_template('home.html', msg = msg)
 
 @app.route("/logout/")
@@ -36,7 +35,7 @@ def logout():
 
 @app.route("/home/", methods = ['GET'])
 def home():
-    return render_template('home.html')
+    return render_template('library.html') # my workshop when created
 
 
 if __name__ == "__main__":
