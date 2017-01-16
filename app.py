@@ -4,9 +4,15 @@ from utils import accounts, initTables, docs, info
 app = Flask(__name__)
 app.secret_key = '95c7fbca92ac5083afda62a564a3d014fc3b72c9140e3cb99ea6bf12'
 
+
+#-------------------------------HELPER FUNCTIONS----------------------------------
+def isLoggedIn():
+    return 'username' in session
+
+#------------------------------------OTHER----------------------------------------
 @app.route("/", methods = ['GET', 'POST'])
 def login():
-    msg = ""
+    msg = ''
     if request.method == 'POST':
         username = request.form['user']
         password = request.form['pass']
@@ -35,8 +41,15 @@ def logout():
 
 @app.route("/home/", methods = ['GET'])
 def home():
+    if not isLoggedIn():
+        return redirect(url_for("login"))
     return render_template('library.html') # my workshop when created
 
+@app.route("/library/")
+# title, description, URL to book cover image, author names
+def library():
+    entries = accounts.getLibraryInfo()
+    return render_template('library.html', lib = entries)
 
 if __name__ == "__main__":
     app.debug = True

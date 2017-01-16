@@ -69,6 +69,7 @@ def getPass(userID):
     c = db.cursor()
     cmd = "SELECT hashedPass FROM accounts WHERE userID = %d;"%(userID)
     sel = c.execute(cmd).fetchone()
+    db.close()
     return sel[0]
 
 # changes a user's hashed password
@@ -83,10 +84,11 @@ def changePass(newHashedPass, userID):
 #-------------------------------DOCS TABLE-------------------------------
 
 # adds a document and its settings into the docs table
-def addDoc(title, content, userID, status, comments):
+# userID for original author, authors for all contributors
+def addDoc(title, content, userID, status, comments, description, coverURL, authors):
     db = sqlite3.connect("data/database.db")
     c = db.cursor()
-    cmd = "INSERT INTO docs VALUES ('%s','%s','%d','%s','%s');"%(title, content, userID, status, comments)
+    cmd = "INSERT INTO docs VALUES ('%s','%s','%d','%s','%s','%s','%s','%s');"%(title, content, userID, status, comments, description, coverURL, authors)
     c.execute(cmd)
     db.commit()
     db.close()
@@ -115,42 +117,45 @@ def getComments(title, userID):
     c = db.cursor()
     cmd = "SELECT comments FROM docs WHERE userID = %d AND title = '%s';"%(int(userID), title)
     sel = c.execute(cmd).fetchone()
-    return sel[0]
-
-# adds a comment to a particular document
-def addComment(title, userID, comment):
-    db = sqlite3.connect("data/database.db")
-    c = db.cursor()
-    tmp = getComments(title, userID) + comment + ";"
-    cmd = "UPDATE docs SET comments = '%s' WHERE userID = %d AND title = '%s';"%(tmp, int(userID), title)
-    sel = c.execute(cmd)
-    db.commit()
     db.close()
+    return sel[0]
 
 # if given comment exists, return true
 # else, return false
 def commentExists(title, userID, comment):
     comments = getComments(title, userID)
-    comments = comments[:len(comments)-1].split(";")
-    for c in comments:
-        if c == comment:
+    comments = comments[:len(comments)-3].split(";;;")
+    for cmt in comments:
+        if cmt == comment:
             return True
     return False
 
+# adds a comment to a particular document
+def addComment(title, userID, comment):
+    if not commentExists(title, userID, comment):
+        db = sqlite3.connect("data/database.db")
+        c = db.cursor()
+        tmp = getComments(title, userID) + comment + ";;;"
+        cmd = "UPDATE docs SET comments = '%s' WHERE userID = %d AND title = '%s';"%(tmp, int(userID), title)
+        sel = c.execute(cmd)
+        db.commit()
+        db.close()
+
 # removes a comment from a particular document
 def rmComment(title, userID, comment):
-    comments = getComments(title, userID)
-    comments = comments[:len(comments)-1].split(";")
-    newComments = ""
-    for c in comments:
-        if c != comment:
-            newComments += c + ";"
-    db = sqlite3.connect("data/database.db")
-    c = db.cursor()
-    cmd = "UPDATE docs SET comments = '%s' WHERE userID = %d AND title = '%s';"%(newComments, int(userID), title)
-    sel = c.execute(cmd)
-    db.commit()
-    db.close()
+    if commentExists(title, userID, comment):
+        comments = getComments(title, userID)
+        comments = comments[:len(comments)-3].split(";;;")
+        newComments = ""
+        for cmt in comments:
+            if cmt != comment:
+                newComments += cmt + ";;;"
+                db = sqlite3.connect("data/database.db")
+                c = db.cursor()
+                cmd = "UPDATE docs SET comments = '%s' WHERE userID = %d AND title = '%s';"%(newComments, int(userID), title)
+                sel = c.execute(cmd)
+                db.commit()
+                db.close()
 
 # if we end up storing the content
 # if not, function is unnecessary because link does not change
@@ -161,3 +166,76 @@ def updateContent(title, userID, newContent):
     sel = c.execute(cmd)
     db.commit()
     db.close()
+
+# changes a document's description
+def changeDescription(title, userID, newDescription):
+    db = sqlite3.connect("data/database.db")
+    c = db.cursor()
+    cmd = "UPDATE docs SET description = '%s' WHERE userID = %d AND title = '%s';"%(newDescription, int(userID), title)
+    sel = c.execute(cmd)
+    db.commit()
+    db.close()
+
+# changes a document's book cover url
+def changeCoverURL(title, userID, newCoverURL):
+    db = sqlite3.connect("data/database.db")
+    c = db.cursor()
+    cmd = "UPDATE docs SET coverURL = '%s' WHERE userID = %d AND title = '%s';"%(newCoverURL, int(userID), title)
+    sel = c.execute(cmd)
+    db.commit()
+    db.close()
+
+# returns the list of authors from a particular document
+def getAuthors(title, userID):
+    db = sqlite3.connect("data/database.db")
+    c = db.cursor()
+    cmd = "SELECT authors FROM docs WHERE userID = %d AND title = '%s';"%(int(userID), title)
+    sel = c.execute(cmd).fetchone()
+    db.close()
+    return sel[0]
+    
+# if given comment exists, return true
+# else, return false
+def authorExists(title, userID, author):
+    authors = getAuthors(title, userID)
+    authors = authors[:len(authors)-3].split(";;;")
+    for a in authors:
+        if a == author:
+            return True
+    return False
+
+# adds an author to a particular document
+def addAuthor(title, userID, author):
+    if not authorExists(title, userID, author):
+        db = sqlite3.connect("data/database.db")
+        c = db.cursor()
+        tmp = getAuthors(title, userID) + author + ";;;"
+        cmd = "UPDATE docs SET authors = '%s' WHERE userID = %d AND title = '%s';"%(tmp, int(userID), title)
+        sel = c.execute(cmd)
+        db.commit()
+        db.close()
+
+# removes an author from a particular document
+def rmAuthor(title, userID, author):
+    if authorExists(title, userID, author):
+        authors = getAuthors(title, userID)
+        authors = authors[:len(comments)-3].split(";;;")
+        newComments = ""
+        for a in authors:
+            if a != author:
+                newAuthors += a + ";;;"
+                db = sqlite3.connect("data/database.db")
+                c = db.cursor()
+                cmd = "UPDATE docs SET authors = '%s' WHERE userID = %d AND title = '%s';"%(newAuthors, int(userID), title)
+                sel = c.execute(cmd)
+                db.commit()
+                db.close()
+
+# returns the title, description, URL to book cover image, author names for all documents
+def getLibraryInfo():
+    db = sqlite3.connect("data/database.db")
+    c = db.cursor()
+    cmd = "SELECT title, description, coverURL, authors FROM docs;"
+    sel = c.execute(cmd)
+    db.close()
+    return sel
