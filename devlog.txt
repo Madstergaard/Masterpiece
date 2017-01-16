@@ -1,4 +1,4 @@
-***Template***
+﻿***Template***
 firstL -- 2016-12-Date Time
 	What was accomplished
 
@@ -7,6 +7,11 @@ Group -- 2017-1-5 2:05pm-2:50pm
 	- Database organization
   - API selection
 	- Timeline
+
+jessicaY -- 2017-01-09 14:16
+	added database functions related to login and registration
+	added some functions related to document information
+	added functions for initializing the database tables
 
 nancyC -- 2017-01-10 20:00
 	good start for home.html
