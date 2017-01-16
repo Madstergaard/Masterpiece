@@ -13,12 +13,21 @@ jessicaY -- 2017-01-09 14:16
 	added some functions related to document information
 	added functions for initializing the database tables
 
+jessicaY -- 2017-01-09 14:46
+	added functions in app.py to connect login/registration backend with frontend
+
 nancyC -- 2017-01-10 20:00
 	good start for home.html
 	-added javascript animations
 	-carousel slideshow works
 	-integrated login function to buttons
 		-but doesn’t work because no secret_key?
+
+jessicaY -- 2017-01-10 20:54
+	added secret key to app.py
+
+jessicaY -- 2017-01-13 14:41
+	added quotes related functions that retrieved data from theysaidso and wikiquote APIs
 
 nancyC -- 2017-01-13 15:00
        completed basic foundation for library.html
@@ -28,3 +37,9 @@ nancyC -- 2017-01-13 15:00
 nancyC -- 2017-01-13 16:00
        completed basic template for workshop and new document
        need to fix aesthetics in new document and connect buttons to backend
+
+jessicaY -- 2017-01-15 22:56
+	updated some database functions and added more functions related to library and documents
+
+jessicaY -- 2017-01-15 23:05
+	updated initTables to accommodate the new information being added to the docs table
