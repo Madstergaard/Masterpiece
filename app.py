@@ -31,6 +31,9 @@ def login():
             if not accounts.userExists(username):
                 accounts.register(username, hashedPass)
                 msg = 'Successfully logged in'
+                session['username'] = username
+                session['userID'] = accounts.getUID(username)
+                return redirect(url_for("home"))
             else:
                 msg = 'User already exists'
     return render_template('home.html', msg = msg)
