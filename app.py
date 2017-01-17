@@ -23,6 +23,7 @@ def login():
             else:
                 if accounts.verify(username, hashedPass):
                     session['username'] = username
+                    session['userID'] = accounts.getUID(username)
                     return redirect(url_for("home"))
                 else:
                     msg = 'Wrong password'
@@ -44,6 +45,22 @@ def home():
     if not isLoggedIn():
         return redirect(url_for("login"))
     return render_template('library.html') # my workshop when created
+
+@app.route("/create/", methods = ['POST'])
+def create():
+    if not isLoggedIn():
+        return redirect(url_for("login"))
+    title  = request.form['title']
+    description = request.form['description']
+    image = request.form['image']
+    privacy = request.form['privacy']
+    content = "" #probably GoogleDocs link
+    userID = session['userID']
+    comments = ""
+    authors = session['username'] + ";;;"
+    accounts.addDoc(title, content, userID, privacy, comments, description, image, authors)
+    return redirect(url_for('home'))
+    
 
 @app.route("/library/")
 # title, description, URL to book cover image, author names

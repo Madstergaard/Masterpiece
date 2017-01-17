@@ -1,4 +1,4 @@
-﻿***Template***
+***Template***
 firstL -- 2016-12-Date Time
 	What was accomplished
 
@@ -46,3 +46,7 @@ jessicaY -- 2017-01-15 23:05
 
 nancyC -- 2017-01-16 22:00
        created barebones doc.html
+
+jessicaY -- 2017-01-17 14:32
+	connected create function with the form
+
