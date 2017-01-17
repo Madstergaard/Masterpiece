@@ -1,5 +1,5 @@
 from flask import Flask, render_template, session, redirect, url_for, request
-from utils import accounts, initTables, docs, info
+from utils import accounts, initTables, info
 
 app = Flask(__name__)
 app.secret_key = '95c7fbca92ac5083afda62a564a3d014fc3b72c9140e3cb99ea6bf12'
