@@ -169,3 +169,7 @@ blockquote p {
     color: #031552;
     text-align: right;
 }
+
+a {
+    color:black;
+}
