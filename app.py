@@ -41,6 +41,7 @@ def login():
 @app.route("/logout/")
 def logout():
     session.pop('username')
+    session.pop('userID')
     return redirect(url_for("login"))
 
 @app.route("/home/", methods = ['GET'])
@@ -49,8 +50,15 @@ def home():
         return redirect(url_for("login"))
     return render_template('library.html') # my workshop when created
 
-@app.route("/create/", methods = ['POST'])
+@app.route("/create/")
 def create():
+    if not isLoggedIn():
+        return redirect(url_for("login"))
+    else:
+        return render_template('create.html')
+
+@app.route("/createDoc/", methods = ['POST'])
+def createDoc():
     if not isLoggedIn():
         return redirect(url_for("login"))
     title  = request.form['title']
@@ -63,7 +71,6 @@ def create():
     authors = session['username'] + ";;;"
     accounts.addDoc(title, content, userID, privacy, comments, description, image, authors)
     return redirect(url_for('home'))
-    
 
 @app.route("/library/")
 # title, description, URL to book cover image, author names
