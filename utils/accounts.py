@@ -271,7 +271,7 @@ def rmAuthor(title, userID, author):
 def getUserDocs(userID):
     db = sqlite3.connect("data/database.db")
     c = db.cursor()
-    cmd = "SELECT title, description, coverURL FROM docs WHERE userID = %d;"%(int(userID))
+    cmd = "SELECT title, content, description, coverURL FROM docs WHERE userID = %d;"%(int(userID))
     sel = c.execute(cmd)
     db.close()
     return sel
