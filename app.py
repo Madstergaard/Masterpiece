@@ -12,31 +12,34 @@ def isLoggedIn():
 #------------------------------------OTHER----------------------------------------
 @app.route("/", methods = ['GET', 'POST'])
 def login():
-    msg = ''
-    if request.method == 'POST':
-        username = request.form['user']
-        password = request.form['pass']
-        hashedPass = accounts.hashPass(password)
-        if 'login' in request.form:
-            if not accounts.userExists(username):
-                msg = 'User does not exist'
-            else:
-                if accounts.verify(username, hashedPass):
+    if isLoggedIn():
+        return redirect(url_for("home"))
+    else:
+        msg = ''
+        if request.method == 'POST':
+            username = request.form['user']
+            password = request.form['pass']
+            hashedPass = accounts.hashPass(password)
+            if 'login' in request.form:
+                if not accounts.userExists(username):
+                    msg = 'User does not exist'
+                else:
+                    if accounts.verify(username, hashedPass):
+                        session['username'] = username
+                        session['userID'] = accounts.getUID(username)
+                        return redirect(url_for("home"))
+                    else:
+                        msg = 'Wrong password'
+            if 'register' in request.form:
+                if not accounts.userExists(username):
+                    accounts.register(username, hashedPass)
+                    msg = 'Successfully logged in'
                     session['username'] = username
                     session['userID'] = accounts.getUID(username)
                     return redirect(url_for("home"))
                 else:
-                    msg = 'Wrong password'
-        if 'register' in request.form:
-            if not accounts.userExists(username):
-                accounts.register(username, hashedPass)
-                msg = 'Successfully logged in'
-                session['username'] = username
-                session['userID'] = accounts.getUID(username)
-                return redirect(url_for("home"))
-            else:
-                msg = 'User already exists'
-    return render_template('home.html', msg = msg)
+                    msg = 'User already exists'
+        return render_template('home.html', msg = msg)
 
 @app.route("/logout/")
 def logout():
@@ -48,7 +51,8 @@ def logout():
 def home():
     if not isLoggedIn():
         return redirect(url_for("login"))
-    return render_template('library.html') # my workshop when created
+    else:
+        return render_template('library.html') # redirects to my workshop when created
 
 @app.route("/create/")
 def create():
@@ -61,17 +65,33 @@ def create():
 def createDoc():
     if not isLoggedIn():
         return redirect(url_for("login"))
-    title  = request.form['title']
-    description = request.form['description']
-    image = request.form['image']
-    privacy = request.form['privacy']
-    content = "" #probably GoogleDocs link
-    userID = session['userID']
-    comments = ""
-    authors = session['username'] + ";;;"
-    accounts.addDoc(title, content, userID, privacy, comments, description, image, authors)
-    return redirect(url_for('home'))
+    else:
+        title  = request.form['title']
+        description = request.form['description']
+        image = request.form['image']
+        privacy = request.form['privacy']
+        content = "" #probably GoogleDocs link
+        userID = session['userID']
+        comments = ""
+        authors = session['username'] + ";;;"
+        accounts.addDoc(title, content, userID, privacy, comments, description, image, authors)
+        return redirect(url_for('home')) # redirects to doc page when created
 
+'''
+@app.route("<author>/<title>")
+def doc(author, title):
+    if not isLoggedIn():
+        return redirect(url_for("login"))
+    else:
+        ogAuthor = getUID(author)
+        #doc = getContent(title, ogAuthor)
+        #privacy = getStatus(title, ogAuthor)
+        #description = getDescription(title, ogAuthor)
+        authors = getAuthors(title, ogAuthor)
+        # if doc is private, check if authorExists(title, ogAuthor, session['username'])
+        return render_template('doc.html')
+'''
+    
 @app.route("/library/")
 # title, description, URL to book cover image, author names
 def library():
