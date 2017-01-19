@@ -63,4 +63,12 @@ nancyC -- 2017-01-16 22:00
 jessicaY -- 2017-01-17 14:32
 	connected create function with the form
 
+jessicaY -- 2017-01-18 14:32
+	fixed create route
 
+jessicaY -- 2017-01-18 14:50
+	updated docs table from 5 columns to 8 columns
+
+jessicaY -- 2017-01-19 00:40	
+	fixed redirect for login route
+	worked on doc route
