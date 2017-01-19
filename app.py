@@ -91,6 +91,7 @@ def workshop():
         return redirect(url_for("login"))
     else:
         docs = accounts.getUserDocs(session['userID'])
+        print docs
         return render_template('workshop.html', work = docs)
 
 @app.route("/library/")
