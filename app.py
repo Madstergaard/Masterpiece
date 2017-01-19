@@ -13,7 +13,7 @@ def isLoggedIn():
 @app.route("/", methods = ['GET', 'POST'])
 def login():
     if isLoggedIn():
-        return redirect(url_for("home"))
+        return redirect(url_for("library"))
     else:
         msg = ''
         if request.method == 'POST':
@@ -27,7 +27,7 @@ def login():
                     if accounts.verify(username, hashedPass):
                         session['username'] = username
                         session['userID'] = accounts.getUID(username)
-                        return redirect(url_for("home"))
+                        return redirect(url_for("library"))
                     else:
                         msg = 'Wrong password'
             if 'register' in request.form:
@@ -36,7 +36,7 @@ def login():
                     msg = 'Successfully logged in'
                     session['username'] = username
                     session['userID'] = accounts.getUID(username)
-                    return redirect(url_for("home"))
+                    return redirect(url_for("library"))
                 else:
                     msg = 'User already exists'
         return render_template('home.html', msg = msg)
@@ -46,13 +46,6 @@ def logout():
     session.pop('username')
     session.pop('userID')
     return redirect(url_for("login"))
-
-@app.route("/home/", methods = ['GET'])
-def home():
-    if not isLoggedIn():
-        return redirect(url_for("login"))
-    else:
-        return render_template('library.html') # redirects to my workshop when created
 
 @app.route("/create/")
 def create():
@@ -75,7 +68,7 @@ def createDoc():
         comments = ""
         authors = session['username'] + ";;;"
         accounts.addDoc(title, content, userID, privacy, comments, description, image, authors)
-        return redirect(url_for('home')) # redirects to doc page when created
+        return redirect(url_for('library')) # redirects to doc page when created
 
 '''
 @app.route("<author>/<title>")
@@ -107,6 +100,7 @@ def library():
         return redirect(url_for("login"))
     else:
         entries = accounts.getLibraryInfo()
+        print entries
         return render_template('library.html', lib = entries)
 
 if __name__ == "__main__":

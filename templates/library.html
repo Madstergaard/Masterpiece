@@ -22,7 +22,7 @@
       <nav class="navbar navbar-default navbar-fixed-top">
         <div class="container-fluid">
             <ul class="nav navbar-nav navbar-left">
-                <li> <a class="navbar-brand" href="../home"> 
+                <li> <a class="navbar-brand" href=".."> 
                     <p id="typing"> <b> masterpiece: </b> write, beautifully.<span id="blinker">|</span></p> 
                     </a> </li>
             </ul>
@@ -42,7 +42,6 @@
       </nav> 
       </div>
 
-
     <div class="container-fluid title"> 
         <h1>Library</h1>
             <i><h4>read works from other users.</h4></i>
@@ -52,56 +51,21 @@
     <div class="container-fluid"> 
         <ul class="bookshelf">
             <!--ADD BOOKS HERE-->
+        {% for doc in library %}
           <li class="bookshelf-book">
                 <!--BOOK COVER IMAGE-->
-                <img src="http://www.websiteoptimization.com/secrets/img/wso-book-cover-500.png" />
+                <img src="{{item[2]}}" />
               <div class="bookshelf-caption bottom-to-top">
-                <h4>Website Optimization</h4>
-                <p>Pro solum vivendo id, vim ne consul liberavisse reprehendunt. Nec at quis veri prima. Nam ex quot possim repudiare, an erant graece aperiri sea. Albucius percipitur per ne.</p>
+                <!--TITLE-->
+                <h4>{{item[0]}} by {{item[3]}}</h4> 
+                <!--DESCRIPTION-->
+                <p>{{item[1]}}</p>
                   <br>
                   <!--LINK TO BOOK HERE-->
-                  <center><button class="btn"><b>Read</b></button></center>
+                  <center><button class="btn" href=""><b>Read</b></button></center>
               </div>
           </li>
-
-          <li class="bookshelf-book">
-                <img src="http://media-cache-ak0.pinimg.com/736x/dc/80/0a/dc800a5dd2118a7e1405b78d09a0f0b1.jpg" />
-              <div class="bookshelf-caption bottom-to-top">
-                <h4>Charlotte au Chocolat</h4>
-                <p>Pro solum vivendo id, vim ne consul liberavisse reprehendunt. Nec at quis veri prima. Nam ex quot possim repudiare, an erant graece aperiri sea. Albucius percipitur per ne.</p>
-                  <br>
-                  <center><button class="btn"><b>Read</b></button></center>
-              </div>
-          </li>
-
-          <li class="bookshelf-book">
-                <img src="http://media-cache-ak0.pinimg.com/736x/dd/d8/b8/ddd8b828eec6559686b8f5dc79362d40.jpg" />
-              <div class="bookshelf-caption bottom-to-top">
-                <h4>Schiller</h4>
-                <p>Pro solum vivendo id, vim ne consul liberavisse reprehendunt. Nec at quis veri prima. Nam ex quot possim repudiare, an erant graece aperiri sea. Albucius percipitur per ne.</p>
-                  <br>
-                  <center><button class="btn"><b>Read</b></button></center>
-              </div>
-          </li>
-
-          <li class="bookshelf-book">
-                <img src="http://cdn.collider.com/wp-content/uploads/ready-player-one-book-cover.jpg" />
-              <div class="bookshelf-caption bottom-to-top">
-                <h4>Ready Player One</h4>
-                <p>Pro solum vivendo id, vim ne consul liberavisse reprehendunt. Nec at quis veri prima. Nam ex quot possim repudiare, an erant graece aperiri sea. Albucius percipitur per ne.</p>
-                  <br>
-                  <center><button class="btn"><b>Read</b></button></center>
-              </div>
-          </li>
-
-          <li class="bookshelf-book">
-                <img src="http://1.bp.blogspot.com/-m5FXYqTLrC8/TsaJ-XzS2FI/AAAAAAAAAIw/p_2A4ryyb6Q/s1600/book+cover.jpg" />
-              <div class="bookshelf-caption bottom-to-top">
-                <h4>The Day Parliament Burned Down</h4>
-                <p>Pro solum vivendo id, vim ne consul liberavisse reprehendunt. Nec at quis veri prima. Nam ex quot possim repudiare, an erant graece aperiri sea. Albucius percipitur per ne.</p>
-                  <center><button class="btn"><b>Read</b></button></center>
-              </div>
-          </li>
+        {% endfor %}
         </ul>
       </div>
       
