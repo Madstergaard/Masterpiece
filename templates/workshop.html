@@ -54,6 +54,12 @@
         <br>
     </div>
       
+    {% if work.length == 0 %}
+      <center><h5> :( <br><br> oops... nothing here! <br><br> click on "New Document" to create a new document!</h5></center>    
+    {% else %}
+    {% endif %}
+          
+
     <!--SAME BOOK TEMPLATE AS IN LIBRARY.HTML-->
  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
