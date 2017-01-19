@@ -102,6 +102,15 @@ def changeTitle(title, userID, newTitle):
     db.commit()
     db.close()
 
+# returns the status of a particular document
+def getStatus(title, userID):
+    db = sqlite3.connect("data/database.db")
+    c = db.cursor()
+    cmd = "SELECT status FROM docs WHERE userID = %d AND title = '%s';"%(int(userID), title)
+    sel = c.execute(cmd).fetchone()
+    db.close()
+    return sel[0]
+    
 # changes a document's status from private to public or public to private
 def changeStatus(title, userID, newStatus):
     db = sqlite3.connect("data/database.db")
@@ -157,6 +166,15 @@ def rmComment(title, userID, comment):
                 db.commit()
                 db.close()
 
+# returns doc link
+def getContent(title, userID):
+    db = sqlite3.connect("data/database.db")
+    c = db.cursor()
+    cmd = "SELECT content FROM docs WHERE userID = %d AND title = '%s';"%(int(userID), title)
+    sel = c.execute(cmd).fetchone()
+    db.close()
+    return sel[0]
+                
 # if we end up storing the content
 # if not, function is unnecessary because link does not change
 def updateContent(title, userID, newContent):
@@ -167,6 +185,15 @@ def updateContent(title, userID, newContent):
     db.commit()
     db.close()
 
+# returns a document's description
+def getDescription(title, userID):
+    db = sqlite3.connect("data/database.db")
+    c = db.cursor()
+    cmd = "SELECT description FROM docs WHERE userID = %d AND title = '%s';"%(int(userID), title)
+    sel = c.execute(cmd).fetchone()
+    db.close()
+    return sel[0]
+
 # changes a document's description
 def changeDescription(title, userID, newDescription):
     db = sqlite3.connect("data/database.db")
@@ -176,6 +203,15 @@ def changeDescription(title, userID, newDescription):
     db.commit()
     db.close()
 
+# returns a document's book cover url
+def getCoverURL(title, userID):
+    db = sqlite3.connect("data/database.db")
+    c = db.cursor()
+    cmd = "SELECT coverURL FROM docs WHERE userID = %d AND title = '%s';"%(int(userID), title)
+    sel = c.execute(cmd).fetchone()
+    db.close()
+    return sel[0]
+    
 # changes a document's book cover url
 def changeCoverURL(title, userID, newCoverURL):
     db = sqlite3.connect("data/database.db")
@@ -194,7 +230,7 @@ def getAuthors(title, userID):
     db.close()
     return sel[0]
     
-# if given comment exists, return true
+# if given author exists, return true
 # else, return false
 def authorExists(title, userID, author):
     authors = getAuthors(title, userID)
@@ -231,11 +267,20 @@ def rmAuthor(title, userID, author):
                 db.commit()
                 db.close()
 
+# returns all of the documents that the user created
+def getUserDocs(userID):
+    db = sqlite3.connect("data/database.db")
+    c = db.cursor()
+    cmd = "SELECT title, description, coverURL FROM docs WHERE userID = %d;"%(int(userID))
+    sel = c.execute(cmd)
+    db.close()
+    return sel
+                
 # returns the title, description, URL to book cover image, author names for all documents
 def getLibraryInfo():
     db = sqlite3.connect("data/database.db")
     c = db.cursor()
-    cmd = "SELECT title, description, coverURL, authors FROM docs;"
+    cmd = "SELECT title, description, coverURL, authors FROM docs WHERE status = '%s';"%("public")
     sel = c.execute(cmd)
     db.close()
     return sel

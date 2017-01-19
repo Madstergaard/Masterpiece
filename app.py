@@ -84,19 +84,30 @@ def doc(author, title):
         return redirect(url_for("login"))
     else:
         ogAuthor = getUID(author)
-        #doc = getContent(title, ogAuthor)
-        #privacy = getStatus(title, ogAuthor)
-        #description = getDescription(title, ogAuthor)
+        doc = getContent(title, ogAuthor)
+        privacy = getStatus(title, ogAuthor)
+        description = getDescription(title, ogAuthor)
         authors = getAuthors(title, ogAuthor)
         # if doc is private, check if authorExists(title, ogAuthor, session['username'])
         return render_template('doc.html')
 '''
-    
+
+@app.route("/workshop/")
+def workshop():
+    if not isLoggedIn():
+        return redirect(url_for("login"))
+    else:
+        docs = accounts.getUserDocs(session['userID'])
+        return render_template('workshop.html', work = docs)
+
 @app.route("/library/")
 # title, description, URL to book cover image, author names
 def library():
-    entries = accounts.getLibraryInfo()
-    return render_template('library.html', lib = entries)
+    if not isLoggedIn():
+        return redirect(url_for("login"))
+    else:
+        entries = accounts.getLibraryInfo()
+        return render_template('library.html', lib = entries)
 
 if __name__ == "__main__":
     app.debug = True

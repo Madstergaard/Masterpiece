@@ -72,3 +72,8 @@ jessicaY -- 2017-01-18 14:50
 jessicaY -- 2017-01-19 00:40	
 	fixed redirect for login route
 	worked on doc route
+
+jessicaY -- 2017-01-19 14:37
+	added workshop route
+	fixed library info function
+	added get functions for the doc route
