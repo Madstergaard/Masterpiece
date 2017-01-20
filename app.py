@@ -60,30 +60,35 @@ def createDoc():
         return redirect(url_for("login"))
     else:
         title  = request.form['title']
-        description = request.form['description']
-        image = request.form['image']
-        privacy = request.form['privacy']
-        content = "" #probably GoogleDocs link
-        userID = session['userID']
-        comments = ""
-        authors = session['username'] + ";;;"
-        accounts.addDoc(title, content, userID, privacy, comments, description, image, authors)
-        return redirect(url_for('library')) # redirects to doc page when created
+        if accounts.titleExists(title, session['userID']):
+            return render_template('create.html', msg = "Title already exists. Choose another title.")
+        else:
+            description = request.form['description']
+            image = request.form['image']
+            privacy = request.form['privacy']
+            content = "" #probably GoogleDocs link
+            userID = session['userID']
+            comments = ""
+            authors = session['username'] + ";;;"
+            accounts.addDoc(title, content, userID, privacy, comments, description, image, authors)
+            author = str(session['username'])
+            title = str(title)
+            return redirect(url_for("doc", author = author, title = title))
 
-'''
-@app.route("<author>/<title>")
+@app.route("/<author>/<title>/")
 def doc(author, title):
     if not isLoggedIn():
         return redirect(url_for("login"))
     else:
+        '''
         ogAuthor = getUID(author)
         doc = getContent(title, ogAuthor)
         privacy = getStatus(title, ogAuthor)
         description = getDescription(title, ogAuthor)
         authors = getAuthors(title, ogAuthor)
         # if doc is private, check if authorExists(title, ogAuthor, session['username'])
+        '''
         return render_template('doc.html')
-'''
 
 @app.route("/workshop/")
 def workshop():
