@@ -81,3 +81,9 @@ jessicaY -- 2017-01-19 14:37
 nancyC -- 2017-01-19 16:00
        fixed nav bar links
        added message alert for faulty login
+
+nancyC -- 2017-01-20 14:00
+       connected library.html and workshop.html with database
+       		 - but entries show up weirdly without a image
+       new document page adds entry to database
+       
