@@ -57,6 +57,26 @@
     {% if work.length == 0 %}
       <center><h5> :( <br><br> oops... nothing here! <br><br> click on "New Document" to create a new document!</h5></center>    
     {% else %}
+      <div class="container-fluid"> 
+            <ul class="bookshelf">
+                <!--ADD BOOKS HERE-->
+                {% for item in work %}
+                    <li class="bookshelf-book">
+                        <!--BOOK COVER IMAGE-->
+                        <img src="{{item[2]}}" />
+                        <div class="bookshelf-caption bottom-to-top">
+                            <!--TITLE-->
+                            <h4>{{item[0]}} by {{item[3]}}</h4> 
+                            <!--DESCRIPTION-->
+                            <p>{{item[1]}}</p>
+                            <br>
+                    <!--LINK TO BOOK HERE-->
+                        <center><button class="btn" href=""><b>Read</b></button></center>
+                        </div>
+                    </li>
+                {% endfor %}
+            </ul>
+      </div>        
     {% endif %}
           
 
