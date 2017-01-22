@@ -1,14 +1,54 @@
 from flask import Flask, render_template, session, redirect, url_for, request
+from apiai import apiai
 from utils import accounts, initTables, info
+import json
 
 app = Flask(__name__)
 app.secret_key = '95c7fbca92ac5083afda62a564a3d014fc3b72c9140e3cb99ea6bf12'
+agent = apiai.ApiAI('5294825b21dc4746851ba49e25ff909b') # client access token
 
+writingType = ''
+topic = ''
 
 #-------------------------------HELPER FUNCTIONS----------------------------------
 def isLoggedIn():
     return 'username' in session
 
+def checkImage(img):
+    extensions = ['.png', '.jpg', '.jpeg', '.gif', '.bmp']
+    for ext in extensions:
+        if ext in img:
+            return True
+    return False
+
+#-------------------------------API.AI FUNCTIONS----------------------------------
+
+def saveType(inputType):
+    writingType = inputType
+    return writingType
+
+def saveTopic(inputTopic):
+    topic = inputTopic
+    quote = info.firstQuote(topic)[0]
+    print quote
+
+def main():
+    userInput = ""
+    while userInput != 'exit':
+        request = agent.text_request()
+        request.session_id = "<session_id>"
+        userInput = raw_input("me: ")
+        request.query = userInput
+        response = request.getresponse().read()
+        d = json.loads(response)
+        result = d['result']
+        botResponse = result['fulfillment']['speech']
+        print 'masterpiece: ' + botResponse
+        if result['action'] == 'saveType':
+            saveType(userInput)
+        if result['action'] == 'saveTopic':
+            saveTopic(userInput)
+    
 #------------------------------------OTHER----------------------------------------
 @app.route("/", methods = ['GET', 'POST'])
 def login():
@@ -65,6 +105,8 @@ def createDoc():
         else:
             description = request.form['description']
             image = request.form['image']
+            if not checkImage(image):
+                image = 'http://www.kalahandi.info/wp-content/uploads/2016/05/sorry-image-not-available.png'
             privacy = request.form['privacy']
             content = "" #probably GoogleDocs link
             userID = session['userID']
@@ -112,3 +154,4 @@ def library():
 if __name__ == "__main__":
     app.debug = True
     app.run()
+    #main() # chatbot
