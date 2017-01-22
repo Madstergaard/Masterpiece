@@ -82,8 +82,17 @@ nancyC -- 2017-01-19 16:00
        fixed nav bar links
        added message alert for faulty login
 
+jessicaY -- 2017-01-19 17:55
+	fixed db functions to return lists instead of cursor objects
+
 nancyC -- 2017-01-20 14:00
        connected library.html and workshop.html with database
        		 - but entries show up weirdly without a image
        new document page adds entry to database
+
+jessicaY -- 2017-01-20 14:49
+	fixed createDoc redirect
        
+jessicaY -- 2017-01-22 17:37
+	added working chatbot
+	fixed the image issue for bad image links
