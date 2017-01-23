@@ -21,6 +21,15 @@ def checkImage(img):
             return True
     return False
 
+# replaces all instances of ' or " to ` to prevent sqlite errors
+def cleanString(s):
+    s = s.replace("'", '`')
+    s = s.replace('"', '`')
+    return s
+
+#string = "That's great, but I\"d rather not."
+#print cleanString(string) 
+
 #-------------------------------API.AI FUNCTIONS----------------------------------
 
 def saveType(inputType):
@@ -99,11 +108,12 @@ def createDoc():
     if not isLoggedIn():
         return redirect(url_for("login"))
     else:
-        title  = request.form['title']
+        title  = cleanString(str(request.form['title']))
+        print title
         if accounts.titleExists(title, session['userID']):
             return render_template('create.html', msg = "Title already exists. Choose another title.")
         else:
-            description = request.form['description']
+            description = cleanString(str(request.form['description']))
             image = request.form['image']
             if not checkImage(image):
                 image = 'http://www.kalahandi.info/wp-content/uploads/2016/05/sorry-image-not-available.png'
