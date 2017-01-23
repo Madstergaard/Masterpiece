@@ -1,30 +1,61 @@
 <html>
 <head>
-  <meta name="google-signin-client_id" content="{{ CLIENT_ID }}" >
+  <meta name="google-signin-scope" content="profile email">
+  <meta name="google-signin-client_id" content="{{ CLIENT_ID }}">
+  <meta name="google-signin-redirect_uri" content="{{ REDIRECT_URI }}">
+  <script src="https://apis.google.com/js/platform.js" async defer></script>
+  <script src="https://apis.google.com/js/api.js" async defer></script>
 </head>
 <body>
-<div id="my-signin2" class="g-signin2" data-width="300" data-height="200" data-longtitle="true">
-                 <script>
-                    function onSuccess(googleUser) {
-                    console.log('Logged in as: ' + googleUser.getBasicProfile().getName());
-                    }
-                    function onFailure(error) {
-                      console.log(error);
-                    }
-                    function renderButton() {
-                      gapi.signin2.render('my-signin2', {
-                        'scope': 'profile email',
-                        'response_type': 'code',
-                        'width': 240,
-                        'height': 50,
-                        'longtitle': true,
-                        'theme': 'dark',
-                        'onsuccess': onSuccess,
-                        'onfailure': onFailure
-                      });
-                    }
-                  </script>
-               </div>
-<script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
+  <div class="g-signin2" id="sign-in-button" data-onsuccess="onSignIn" >
+    <script>
+      function onSignIn(googleUser) {
+        gapi.load('auth2', function() {
+        auth2 = gapi.auth2.init({
+          client_id: '{{ CLIENT_ID }}',
+          fetch_basic_profile: false,
+          scope: 'profile email'
+          });
+          // Sign the user in, and then retrieve their ID.
+          auth2.signIn().then(function() {
+          console.log(auth2.currentUser.get().getId());
+          });
+        });
+
+        var button = document.getElementById("sign-in-button")
+        button.AddEventListener("click", GoogleAuth.signIn())
+        // Useful data for your client-side scripts:
+        if (auth2.isSignedIn.get()) {
+          var profile = googleUser.getBasicProfile();
+          console.log("ID: " + profile.getId()); // Don't send this directly to your server!
+          console.log('Full Name: ' + profile.getName());
+          console.log('Given Name: ' + profile.getGivenName());
+          console.log('Family Name: ' + profile.getFamilyName());
+          console.log("Image URL: " + profile.getImageUrl());
+          console.log("Email: " + profile.getEmail());
+        }
+
+        // The ID token you need to pass to your backend:
+        var id_token = googleUser.getAuthResponse().id_token;
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', 'https://localhost:5000/signIn');
+        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        xhr.onload = function() {
+          console.log('Signed in as: ' + xhr.responseText);
+        };
+        xhr.send('idtoken=' + id_token);
+      };
+    </script>
+  </div>
+  <br>
+  <a href="#" onclick="signOut();">Sign out</a>
+    <script>
+      function signOut() {
+        var auth2 = gapi.auth2.getAuthInstance();
+        auth2.signOut().then(function () {
+        console.log('User signed out.');
+        });
+      }
+    </script>
 </body>
 </html>

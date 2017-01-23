@@ -13,7 +13,7 @@ GOOGLE_AUTH_URL = "https://accounts.google.com/o/oauth2/auth"
 GOOGLE_TOKEN_URL = "https://accounts.google.com/o/oauth2/token"
 
 # Server-side Parameters
-REDIRECT_URI = 'http://127.0.0.1:5000/login/'
+REDIRECT_URI = 'http://localhost:5000/home/'
 SHOW_DIALOG_bool = True
 SHOW_DIALOG_str = str(SHOW_DIALOG_bool).lower()
 STATE = str(uuid.uuid4())
