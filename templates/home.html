@@ -19,11 +19,12 @@
       <nav class="navbar navbar-default navbar-fixed-top">
         <div class="container-fluid">
             <ul class="nav navbar-nav navbar-left">
-                <li> <a class="navbar-brand" href="home.html"> 
+                <li> <a class="navbar-brand" href="/"> 
                     <p id="typing"> <b> masterpiece: </b> write, beautifully.<span id="blinker">|</span></p> 
                     </a> </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
+                <a id="msg">{{msg}}</a>
                 <!--SIGN IN BUTTON-->
                 <button type="button" class="btn btn1 b1" data-toggle="modal" data-target="#signup">Sign Up</button>
                 <!--LOGIN BUTTON-->
@@ -140,9 +141,9 @@
             <div class="modal-body">
               <!--sign up form-->
               <form action="/" method="POST">
-                <input class="form-field" placeholder="Username" type="text" name="user">
+                <input class="form-field" placeholder="Username" type="text" name="user" required>
                 <br>
-                <input class="form-field" placeholder="Password" type="password" name="pass">
+                <input class="form-field" placeholder="Password" type="password" name="pass" required>
                 <hr>
                   <div class=text-right>
                       <input type="submit" name="register" value="➔" class="btn btn-modal">
@@ -166,9 +167,9 @@
             <div class="modal-body">
               <!--login form-->
               <form action="/" method="POST">
-                <input class="form-field" placeholder="Username" type="text" name="user">
+                <input class="form-field" placeholder="Username" type="text" name="user" required>
                 <br>
-                <input class="form-field" placeholder="Password" type="password" name="pass">
+                <input class="form-field" placeholder="Password" type="password" name="pass" required>
                 <hr>
                   <div class=text-right>
                     <input type="submit" name="login" value="➔" class="btn btn-modal">

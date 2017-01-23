@@ -1,5 +1,11 @@
 @import url('https://fonts.googleapis.com/css?family=Raleway:200,700');
 
+#msg {
+    font-family: 'Raleway', sans-serif;
+    margin-right: .75em;
+    font-style: italic;
+}
+
 #slide1 {
     bottom: 50%;
     transform: translateY(45%);
@@ -168,4 +174,8 @@ blockquote p {
 .blockquote-footer {
     color: #031552;
     text-align: right;
+}
+
+a {
+    color:black;
 }

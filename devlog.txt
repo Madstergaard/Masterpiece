@@ -1,4 +1,4 @@
-﻿***Template***
+***Template***
 firstL -- 2016-12-Date Time
 	What was accomplished
 
@@ -54,12 +54,45 @@ jessicaY -- 2017-01-15 22:56
 jessicaY -- 2017-01-15 23:05
 	updated initTables to accommodate the new information being added to the docs table
 
-<<<<<<< HEAD
 maddieO -- 2017-01-16 21:00
 	still trying to figure out OAuth
 
-
-=======
 nancyC -- 2017-01-16 22:00
        created barebones doc.html
->>>>>>> 2e9dc7b3c6047fe61cef6c869fa637b3898cb9f0
+
+jessicaY -- 2017-01-17 14:32
+	connected create function with the form
+
+jessicaY -- 2017-01-18 14:32
+	fixed create route
+
+jessicaY -- 2017-01-18 14:50
+	updated docs table from 5 columns to 8 columns
+
+jessicaY -- 2017-01-19 00:40	
+	fixed redirect for login route
+	worked on doc route
+
+jessicaY -- 2017-01-19 14:37
+	added workshop route
+	fixed library info function
+	added get functions for the doc route
+
+nancyC -- 2017-01-19 16:00
+       fixed nav bar links
+       added message alert for faulty login
+
+jessicaY -- 2017-01-19 17:55
+	fixed db functions to return lists instead of cursor objects
+
+nancyC -- 2017-01-20 14:00
+       connected library.html and workshop.html with database
+       		 - but entries show up weirdly without a image
+       new document page adds entry to database
+
+jessicaY -- 2017-01-20 14:49
+	fixed createDoc redirect
+       
+jessicaY -- 2017-01-22 17:37
+	added working chatbot
+	fixed the image issue for bad image links
