@@ -28,7 +28,15 @@ def cleanString(s):
     return s
 
 #string = "That's great, but I\"d rather not."
-#print cleanString(string) 
+#print cleanString(string)
+
+# converts string to a list of strings
+# primarily for authors/comments retrieved from the db
+def stringToList(s):
+    strings = s[:len(s)-3].split(';;;')
+    return strings
+
+#print stringToList('hello;;;nice to meet you;;;')
 
 #-------------------------------API.AI FUNCTIONS----------------------------------
 
@@ -43,20 +51,19 @@ def saveTopic(inputTopic):
 
 def main():
     userInput = ""
-    while userInput != 'exit':
-        request = agent.text_request()
-        request.session_id = "<session_id>"
-        userInput = raw_input("me: ")
-        request.query = userInput
-        response = request.getresponse().read()
-        d = json.loads(response)
-        result = d['result']
-        botResponse = result['fulfillment']['speech']
-        print 'masterpiece: ' + botResponse
-        if result['action'] == 'saveType':
-            saveType(userInput)
-        if result['action'] == 'saveTopic':
-            saveTopic(userInput)
+    request = agent.text_request()
+    request.session_id = "<session_id>"
+    userInput = raw_input("me: ")
+    request.query = userInput
+    response = request.getresponse().read()
+    d = json.loads(response)
+    result = d['result']
+    botResponse = result['fulfillment']['speech']
+    print 'masterpiece: ' + botResponse
+    if result['action'] == 'saveType':
+        saveType(userInput)
+    if result['action'] == 'saveTopic':
+        saveTopic(userInput)
     
 #------------------------------------OTHER----------------------------------------
 @app.route("/", methods = ['GET', 'POST'])
@@ -132,15 +139,23 @@ def doc(author, title):
     if not isLoggedIn():
         return redirect(url_for("login"))
     else:
-        '''
-        ogAuthor = getUID(author)
-        doc = getContent(title, ogAuthor)
-        privacy = getStatus(title, ogAuthor)
-        description = getDescription(title, ogAuthor)
-        authors = getAuthors(title, ogAuthor)
-        # if doc is private, check if authorExists(title, ogAuthor, session['username'])
-        '''
-        return render_template('doc.html')
+        ogAuthor = accounts.getUID(author)
+        #print ogAuthor
+        doc = accounts.getContent(title, ogAuthor)
+        #print doc
+        privacy = accounts.getStatus(title, ogAuthor)
+        #print privacy 
+        description = accounts.getDescription(title, ogAuthor)
+        #print description
+        authors = stringToList(str(accounts.getAuthors(title, ogAuthor)))
+        #print authors
+        if privacy == 'private':
+            if accounts.authorExists(title, ogAuthor, session['username']):
+                return render_template('doc.html', title = title, doc = doc, privacy = privacy, description = description, authors = authors)
+            else:
+                return render_template('doc.html', msg = 'You don\'t have access to this document.')
+        # if doc is public
+        return render_template('doc.html', title = title, doc = doc, privacy = privacy, description = description, authors = authors)
 
 @app.route("/workshop/")
 def workshop():
@@ -164,4 +179,4 @@ def library():
 if __name__ == "__main__":
     app.debug = True
     app.run()
-    #main() # chatbot
+    main() # chatbot
