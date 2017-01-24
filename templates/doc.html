@@ -10,54 +10,66 @@
     <!-- Bootstrap -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-    <link rel="stylesheet" href="../static/css/library.css">
-    <link rel="stylesheet" href="../static/css/home.css">
+    <link rel="stylesheet" href="/../static/css/library.css">
+    <link rel="stylesheet" href="/../static/css/home.css">
 
-      
   </head>
   <body>
-      
+
     <!--NAV BAR-->
     <div class="container-fluid">
       <nav class="navbar navbar-default navbar-fixed-top">
         <div class="container-fluid">
             <ul class="nav navbar-nav navbar-left">
-                <li> <a class="navbar-brand" href=".."> 
-                    <p id="typing"> <b> masterpiece: </b> write, beautifully.<span id="blinker">|</span></p> 
+                <li> <a class="navbar-brand" href="..">
+                    <p id="typing"> <b> masterpiece: </b> write, beautifully.<span id="blinker">|</span></p>
                     </a> </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                     <!--CREAT NEW DOC-->
-                    <form action="#"> 
-                        <input type="submit" class="btn btn2 nav2" value="New Document">   
+                    <form action="#">
+                        <input type="submit" class="btn btn2 nav2" value="New Document">
                     </form>
                     <!-- WORKSHOP-->
-                    <form action="#"> 
-                        <input type="submit" class="btn btn2 nav2" value="My Workshop">   
+                    <form action="#">
+                        <input type="submit" class="btn btn2 nav2" value="My Workshop">
                     </form>
                     <!-- Library-->
-                    <form action="#"> 
-                        <input type="submit" class="btn btn2 nav2" value="Library">     
+                    <form action="#">
+                        <input type="submit" class="btn btn2 nav2" value="Library">
                     </form>
                     <!--LOGOUT BUTTON-->
                     <form action="/logout/">
-                        <input type="submit" class="btn btn2 b1" value="Logout">     
+                        <input type="submit" class="btn btn2 b1" value="Logout">
                     </form>
             </ul>
          </div>
-      </nav> 
+      </nav>
       </div>
 
 
-    <div class="container-fluid title"> 
+    <div class="container-fluid title">
         <h1>Document Name</h1>
         <br>
     </div>
-      
+
+    <center>
+    <div class="container-fluid">
+      <a data-placement="right" data-toggle="tooltip" title="Click me to access your own brainstorming Chatbot!" class="btn btn-default" href="https://console.api.ai/api-client/demo/embedded/ba6a68aa-6105-4838-ae99-cbc2e0e244b1" target="popup" onclick="window.open('https://console.api.ai/api-client/demo/embedded/ba6a68aa-6105-4838-ae99-cbc2e0e244b1','name','width=400,height=600')">
+          <span class="glyphicon glyphicon-comment" aria-hidden="true"></span> Chatbot</a>
+
+    </div> </center>
+
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-    <script src="../static/js/home.js"></script>
-  </body>
+    <script src="/../static/js/home.js"></script>
+    <script>
+    $(document).ready(function(){
+        $('[data-toggle="tooltip"]').tooltip();
+    });
+    </script>
+
+    </body>
 </html>

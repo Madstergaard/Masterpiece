@@ -64,7 +64,7 @@ def main():
         saveType(userInput)
     if result['action'] == 'saveTopic':
         saveTopic(userInput)
-    
+
 #------------------------------------OTHER----------------------------------------
 @app.route("/", methods = ['GET', 'POST'])
 def login():
@@ -144,7 +144,7 @@ def doc(author, title):
         doc = accounts.getContent(title, ogAuthor)
         #print doc
         privacy = accounts.getStatus(title, ogAuthor)
-        #print privacy 
+        #print privacy
         description = accounts.getDescription(title, ogAuthor)
         #print description
         authors = stringToList(str(accounts.getAuthors(title, ogAuthor)))
@@ -179,4 +179,3 @@ def library():
 if __name__ == "__main__":
     app.debug = True
     app.run()
-    main() # chatbot
