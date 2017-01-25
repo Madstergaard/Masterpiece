@@ -14,48 +14,42 @@
     <link rel="stylesheet" href="../static/css/home.css">
     <link rel="stylesheet" href="../static/css/create.css">
 
-      
+
   </head>
   <body>
-      
+
     <!--NAV BAR-->
     <div class="container-fluid">
       <nav class="navbar navbar-default navbar-fixed-top">
         <div class="container-fluid">
             <ul class="nav navbar-nav navbar-left">
-                <li> <a class="navbar-brand" href=".."> 
-                    <p id="typing"> <b> masterpiece: </b> write, beautifully.<span id="blinker">|</span></p> 
+                <li> <a class="navbar-brand" href="..">
+                    <p id="typing"> <b> masterpiece: </b> write, beautifully.<span id="blinker">|</span></p>
                     </a> </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                    <!--NEW DOC-->
-                    <form action="../create/"> 
-                        <input type="submit" class="btn btn2 nav2" value="New Document">   
-                    </form>
+                    <!--CREAT NEW DOC-->
+                    <a class="btn btn2 nav2" href="/../create/">New Document</a>
                     <!-- WORKSHOP-->
-                    <form action="../workshop/"> 
-                        <input type="submit" class="btn btn2 nav2" value="My Workshop">   
-                    </form>
+                    <a class="btn btn2 nav2" href="/../workshop/">My Workshop</a>
                     <!-- Library-->
-                    <form action="../library/"> 
-                        <input type="submit" class="btn btn2 nav2" value="Library">     
-                    </form>
+                    <a class="btn btn2 nav2" href="/../library/">Library</a>
                     <!--LOGOUT BUTTON-->
                     <form action="/logout/">
-                        <input type="submit" class="btn btn2 b1" value="Logout">     
+                        <input type="submit" class="btn btn2 b1" value="Logout">
                     </form>
             </ul>
          </div>
-      </nav> 
+      </nav>
       </div>
-      
-    <div class="container-fluid title"> 
+
+    <div class="container-fluid title">
         <h1>New Document</h1>
         <i><h4>create your newest masterpiece.</h4></i>
         <br>
     </div>
     <center>
-    <div class="container-fluid newdoc"> 
+    <div class="container-fluid newdoc">
         <form action="/createDoc/" method="POST">
             <div class="form-group">
               <label for="example-text-input" class="col-2 col-form-label">Title</label>
@@ -76,7 +70,7 @@
               </div>
             </div>
             <label for="example-text-input" class="col-2 col-form-label">Privacy:</label>
-            <div class="btn-group" data-toggle="buttons"> 
+            <div class="btn-group" data-toggle="buttons">
               <label class="btn btn-primary active">
                 <input type="radio" name="privacy" id="option1" value="public" autocomplete="off" checked> Public
               </label>
@@ -84,10 +78,10 @@
                 <input type="radio" name="privacy" id="option2" value="private" autocomplete="off"> Private
               </label>
             </div>
-            <br><br><br><p><button type="submit" class="btn b1">Create</button>    
+            <br><br><br><p><button type="submit" class="btn b1">Create</button>
         </form>
       </div>
- </center> 
+ </center>
 
 
 

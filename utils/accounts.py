@@ -30,7 +30,7 @@ def register(user, hashedPass):
     entry = "INSERT INTO accounts VALUES ('%s','%s','%d');"%(user, hashedPass, userID)
     c.execute(entry)
     db.commit()
-    db.close()    
+    db.close()
 
 # if username and hashed password given match a username and its corresponding hashed password in the database, return true
 # else, return false
@@ -62,7 +62,7 @@ def getUID(user):
 # returns a hashed version of the password
 def hashPass(password):
     return hashlib.sha224(password).hexdigest()
-    
+
 # returns a user's hashed password
 def getPass(userID):
     db = sqlite3.connect("data/database.db")
@@ -200,7 +200,7 @@ def rmComment(title, userID, comment):
         db.close()
 
 #rmComment("coffee",1,"i agree")
-                
+
 # returns doc link
 def getContent(title, userID):
     db = sqlite3.connect("data/database.db")
@@ -211,7 +211,7 @@ def getContent(title, userID):
     return sel[0]
 
 #print getContent("coffee",1)
-                
+
 # if we end up storing the content
 # if not, function is unnecessary because link does not change
 def updateContent(title, userID, newContent):
@@ -245,7 +245,7 @@ def changeDescription(title, userID, newDescription):
     db.close()
 
 #changeDescription("coffee",1,"very delicious drink")
-    
+
 # returns a document's book cover url
 def getCoverURL(title, userID):
     db = sqlite3.connect("data/database.db")
@@ -256,7 +256,7 @@ def getCoverURL(title, userID):
     return sel[0]
 
 #print getCoverURL("h", 1)
-    
+
 # changes a document's book cover url
 def changeCoverURL(title, userID, newCoverURL):
     db = sqlite3.connect("data/database.db")
@@ -267,7 +267,7 @@ def changeCoverURL(title, userID, newCoverURL):
     db.close()
 
 #changeCoverURL("h",1,"cool")
-    
+
 # returns the list of authors from a particular document
 def getAuthors(title, userID):
     db = sqlite3.connect("data/database.db")
@@ -278,7 +278,7 @@ def getAuthors(title, userID):
     return sel[0]
 
 #print getAuthors("coffee", 1)
-    
+
 # if given author exists, return true
 # else, return false
 def authorExists(title, userID, author):
@@ -301,7 +301,7 @@ def addAuthor(title, userID, author):
         db.close()
 
 #addAuthor("h", 1, "asdf")
-        
+
 # removes an author from a particular document
 def rmAuthor(title, userID, author):
     if authorExists(title, userID, author):
@@ -333,7 +333,7 @@ def getUserDocs(userID):
     return docs
 
 #print getUserDocs(1)
-                
+
 # returns the title, description, URL to book cover image, author names for all public documents
 def getLibraryInfo():
     info = []
