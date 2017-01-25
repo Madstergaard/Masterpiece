@@ -86,15 +86,7 @@
           </ul>
         </div>
       </nav>
-<<<<<<< HEAD
       </div>
-=======
-    </div>
-</ul>
-</div>
-</nav> 
-</div>
->>>>>>> ed5c2f5a296342cba6253914c2acd9e38403728c
 
 <div class="container-fluid title"> 
   <h1>Library</h1>
@@ -102,28 +94,13 @@
   <br>
 </div>
 
-<div class="container-fluid"> 
-  <ul class="bookshelf">
-    <!--ADD BOOKS HERE-->
-    {% for item in lib %}
-    <li class="bookshelf-book">
-      <!--BOOK COVER IMAGE-->
-      <img src="{{item[2]}}" />
-      <div class="bookshelf-caption bottom-to-top">
-        <!--TITLE-->
-        <h4>{{item[0]}} by {{item[3]}}</h4> 
-        <!--DESCRIPTION-->
-        <p>{{item[1]}}</p>
-        <br>
-<<<<<<< HEAD
-    </div>
     <div class="container-fluid"> 
         <ul class="bookshelf">
             <!--ADD BOOKS HERE-->
         {% for item in lib %}
           <li class="bookshelf-book">
                 <!--BOOK COVER IMAGE-->
-                <img style="width: 215px;" src="{{item[2]}}" />
+                <img class="crop" style="width: 250px;" src="{{item[2]}}">
               <div class="bookshelf-caption bottom-to-top">
                 <!--TITLE-->
                 <h4>{{item[0]}} by {{item[3]}}</h4> 
@@ -136,15 +113,8 @@
           </li>
         {% endfor %}
         </ul>
-=======
-        <!--LINK TO BOOK HERE-->
-        <center><button class="btn" href=""><b>Read</b></button></center>
->>>>>>> ed5c2f5a296342cba6253914c2acd9e38403728c
+
       </div>
-    </li>
-    {% endfor %}
-  </ul>
-</div>
 
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
