@@ -87,24 +87,19 @@
          </div>
       </nav>
       </div>
-            </ul>
-         </div>
-      </nav> 
-      </div>
 
     <div class="container-fluid title"> 
         <h1>Library</h1>
             <i><h4>read works from other users.</h4></i>
         <br>
     </div>
-      
     <div class="container-fluid"> 
         <ul class="bookshelf">
             <!--ADD BOOKS HERE-->
         {% for item in lib %}
           <li class="bookshelf-book">
                 <!--BOOK COVER IMAGE-->
-                <img src="{{item[2]}}" />
+                <img style="width: 215px;" src="{{item[2]}}" />
               <div class="bookshelf-caption bottom-to-top">
                 <!--TITLE-->
                 <h4>{{item[0]}} by {{item[3]}}</h4> 
