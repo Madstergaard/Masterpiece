@@ -193,7 +193,12 @@ def workshop():
     else:
         docs = list(accounts.getUserDocs(session['userID']))
         docs = tupleToList(docs)
-        print docs
+        for e in docs:
+            authors = ''
+            for a in e[3]:
+                authors += a + ', '
+            authors = authors[:-2]
+            e[3] = authors
         return render_template('workshop.html', work = docs)
 
 @app.route("/library/")
@@ -204,7 +209,12 @@ def library():
     else:
         entries = accounts.getLibraryInfo()
         entries = tupleToList(entries)
-        print entries
+        for e in entries:
+            authors = ''
+            for a in e[3]:
+                authors += a + ', '
+            authors = authors[:-2]
+            e[3] = authors
         return render_template('library.html', lib = entries, CLIENT_ID = docs.CLIENT_ID, REDIRECT_URI = docs.REDIRECT_URI)
 
 if __name__ == "__main__":
