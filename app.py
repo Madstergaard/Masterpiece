@@ -38,6 +38,23 @@ def stringToList(s):
 
 #print stringToList('hello;;;nice to meet you;;;')
 
+# converts tuple to list
+def tupleToList(t):
+    newList = []
+    for entry in t:
+        entry = list(entry)
+        lEntry = []
+        for item in entry:
+            if isinstance(item, int):
+                lEntry.append(item)
+            else:
+                if ';;;' in item:
+                    lEntry.append(stringToList(str(item)))
+                else:
+                    lEntry.append(str(item))
+        newList.append(lEntry)
+    return newList
+
 #-------------------------------API.AI FUNCTIONS----------------------------------
 
 def saveType(inputType):
@@ -150,6 +167,7 @@ def doc(author, title):
     if not isLoggedIn():
         return redirect(url_for("login"))
     else:
+        print "author" + author
         ogAuthor = accounts.getUID(author)
         #print ogAuthor
         doc = accounts.getContent(title, ogAuthor)
@@ -173,7 +191,8 @@ def workshop():
     if not isLoggedIn():
         return redirect(url_for("login"))
     else:
-        docs = accounts.getUserDocs(session['userID'])
+        docs = list(accounts.getUserDocs(session['userID']))
+        docs = tupleToList(docs)
         print docs
         return render_template('workshop.html', work = docs)
 
@@ -184,6 +203,7 @@ def library():
         return redirect(url_for("login"))
     else:
         entries = accounts.getLibraryInfo()
+        entries = tupleToList(entries)
         print entries
         return render_template('library.html', lib = entries, CLIENT_ID = docs.CLIENT_ID, REDIRECT_URI = docs.REDIRECT_URI)
 

@@ -13,75 +13,75 @@
     <link rel="stylesheet" href="../static/css/library.css">
     <link rel="stylesheet" href="../static/css/home.css">
 
-      
+    
   </head>
   <body>
-      
+    
     <!--NAV BAR-->
     <div class="container-fluid">
       <nav class="navbar navbar-default navbar-fixed-top">
         <div class="container-fluid">
-            <ul class="nav navbar-nav navbar-left">
-                <li> <a class="navbar-brand" href=".."> 
-                    <p id="typing"> <b> masterpiece: </b> write, beautifully.<span id="blinker">|</span></p> 
-                    </a> </li>
-            </ul>
-            <ul class="nav navbar-nav navbar-right">
-                    <!--NEW DOC-->
-                    <form action="../create/"> 
-                        <input type="submit" class="btn btn2 nav2" value="New Document">   
-                    </form>
-                    <!-- WORKSHOP-->
-                    <form action="../workshop/"> 
-                        <input type="submit" class="btn btn2 nav2" value="My Workshop">   
-                    </form>
-                    <!-- Library-->
-                    <form action="../library/"> 
-                        <input type="submit" class="btn btn2 nav2" value="Library">     
-                    </form>
-                    <!--LOGOUT BUTTON-->
-                    <form action="/logout/">
-                        <input type="submit" class="btn btn2 b1" value="Logout">     
-                    </form>
-            </ul>
-         </div>
+          <ul class="nav navbar-nav navbar-left">
+            <li> <a class="navbar-brand" href=".."> 
+                <p id="typing"> <b> masterpiece: </b> write, beautifully.<span id="blinker">|</span></p> 
+            </a> </li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <!--NEW DOC-->
+            <form action="../create/"> 
+              <input type="submit" class="btn btn2 nav2" value="New Document">   
+            </form>
+            <!-- WORKSHOP-->
+            <form action="../workshop/"> 
+              <input type="submit" class="btn btn2 nav2" value="My Workshop">   
+            </form>
+            <!-- Library-->
+            <form action="../library/"> 
+              <input type="submit" class="btn btn2 nav2" value="Library">     
+            </form>
+            <!--LOGOUT BUTTON-->
+            <form action="/logout/">
+              <input type="submit" class="btn btn2 b1" value="Logout">     
+            </form>
+          </ul>
+        </div>
       </nav> 
-      </div>
-      
-    <div class="container-fluid title"> 
-        <h1>My Workshop</h1>
-        <i><h4>one place for all your writing.</h4></i>
-        <br>
     </div>
-      
+    
+    <div class="container-fluid title"> 
+      <h1>My Workshop</h1>
+      <i><h4>one place for all your writing.</h4></i>
+      <br>
+    </div>
+    
     {% if work.length == 0 %}
-      <center><h5> :( <br><br> oops... nothing here! <br><br> click on "New Document" to create a new document!</h5></center>    
+    <center><h5> :( <br><br> oops... nothing here! <br><br> click on "New Document" to create a new document!</h5></center>    
     {% else %}
-      <div class="container-fluid"> 
-            <ul class="bookshelf">
-                <!--ADD BOOKS HERE-->
-                {% for item in work %}
-                    <li class="bookshelf-book">
-                        <!--BOOK COVER IMAGE-->
-                        <img src="{{item[2]}}" />
-                        <div class="bookshelf-caption bottom-to-top">
-                            <!--TITLE-->
-                            <h4>{{item[0]}} by {{item[3]}}</h4> 
-                            <!--DESCRIPTION-->
-                            <p>{{item[1]}}</p>
-                            <br>
-                    <!--LINK TO BOOK HERE-->
-                        <center><button class="btn" href=""><b>Read</b></button></center>
-                        </div>
-                    </li>
-                {% endfor %}
-            </ul>
-      </div>        
+    <div class="container-fluid"> 
+      <ul class="bookshelf">
+        <!--ADD BOOKS HERE-->
+        {% for item in work %}
+        <li class="bookshelf-book">
+          <!--BOOK COVER IMAGE-->
+          <img src="{{item[2]}}" />
+          <div class="bookshelf-caption bottom-to-top">
+            <!--TITLE-->
+            <h4>{{item[0]}} by {{item[3]}}</h4> 
+            <!--DESCRIPTION-->
+            <p>{{item[1]}}</p>
+            <br>
+            <!--LINK TO BOOK HERE-->
+            <center><button class="btn" href=""><b>Read</b></button></center>
+          </div>
+        </li>
+        {% endfor %}
+      </ul>
+    </div>        
     {% endif %}
-          
+    
 
     <!--SAME BOOK TEMPLATE AS IN LIBRARY.HTML-->
- <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
