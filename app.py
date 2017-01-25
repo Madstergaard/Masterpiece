@@ -1,11 +1,12 @@
-from flask import Flask, render_template, session, redirect, url_for, request
+from flask import Flask, render_template, session, redirect, url_for, request, jsonify
 from apiai import apiai
 from utils import accounts, initTables, info, docs
 import json
 
 app = Flask(__name__)
 app.secret_key = '95c7fbca92ac5083afda62a564a3d014fc3b72c9140e3cb99ea6bf12'
-agent = apiai.ApiAI('5294825b21dc4746851ba49e25ff909b') # client access token
+client_access_token = json.loads(open('keys.json').read())['apiai']['client_access_token']
+agent = apiai.ApiAI(client_access_token) # client access token
 
 writingType = ''
 topic = ''
@@ -38,6 +39,23 @@ def stringToList(s):
 
 #print stringToList('hello;;;nice to meet you;;;')
 
+# converts tuple to list
+def tupleToList(t):
+    newList = []
+    for entry in t:
+        entry = list(entry)
+        lEntry = []
+        for item in entry:
+            if isinstance(item, int):
+                lEntry.append(item)
+            else:
+                if ';;;' in item:
+                    lEntry.append(stringToList(str(item)))
+                else:
+                    lEntry.append(str(item))
+        newList.append(lEntry)
+    return newList
+
 #-------------------------------API.AI FUNCTIONS----------------------------------
 
 def saveType(inputType):
@@ -47,23 +65,7 @@ def saveType(inputType):
 def saveTopic(inputTopic):
     topic = inputTopic
     quote = info.firstQuote(topic)[0]
-    print quote
-
-def main():
-    userInput = ""
-    request = agent.text_request()
-    request.session_id = "<session_id>"
-    userInput = raw_input("me: ")
-    request.query = userInput
-    response = request.getresponse().read()
-    d = json.loads(response)
-    result = d['result']
-    botResponse = result['fulfillment']['speech']
-    print 'masterpiece: ' + botResponse
-    if result['action'] == 'saveType':
-        saveType(userInput)
-    if result['action'] == 'saveTopic':
-        saveTopic(userInput)
+    return quote
 
 #------------------------------------OTHER----------------------------------------
 @app.route("/", methods = ['GET', 'POST'])
@@ -129,16 +131,44 @@ def createDoc():
             userID = session['userID']
             comments = ""
             authors = session['username'] + ";;;"
+            
+            if len(title) < 1 or len(description) < 1 or len(image) < 1:
+                return render_template('create.html', msg = "Missing fields. Please complete all the fields in the form.")
+            
             accounts.addDoc(title, content, userID, privacy, comments, description, image, authors)
             author = str(session['username'])
             title = str(title)
             return redirect(url_for("doc", author = author, title = title, CLIENT_ID = docs.CLIENT_ID, REDIRECT_URI = docs.REDIRECT_URI))
 
+@app.route("/temp/")
+def temp():
+    return render_template('chat.html')
+        
+@app.route("/chat/", methods = ['POST'])
+def chat():
+    userInput = request.form['input']
+    #print userInput
+    q = agent.text_request()
+    q.session_id = "<session_id>"
+    q.query = userInput
+    response = q.getresponse().read()
+    d = json.loads(response)
+    result = d['result']
+    botResponse = result['fulfillment']['speech']
+    #print botResponse
+    if result['action'] == 'saveType':
+        print saveType(userInput)
+    if result['action'] == 'saveTopic':
+        botResponse += saveTopic(userInput)
+        
+    return jsonify({'botOutput' : botResponse }) 
+        
 @app.route("/<author>/<title>/")
 def doc(author, title):
     if not isLoggedIn():
         return redirect(url_for("login"))
     else:
+        print "author" + author
         ogAuthor = accounts.getUID(author)
         #print ogAuthor
         doc = accounts.getContent(title, ogAuthor)
@@ -162,8 +192,14 @@ def workshop():
     if not isLoggedIn():
         return redirect(url_for("login"))
     else:
-        docs = accounts.getUserDocs(session['userID'])
-        print docs
+        docs = list(accounts.getUserDocs(session['userID']))
+        docs = tupleToList(docs)
+        for e in docs:
+            authors = ''
+            for a in e[3]:
+                authors += a + ', '
+            authors = authors[:-2]
+            e[3] = authors
         return render_template('workshop.html', work = docs)
 
 @app.route("/library/")
@@ -173,7 +209,13 @@ def library():
         return redirect(url_for("login"))
     else:
         entries = accounts.getLibraryInfo()
-        print entries
+        entries = tupleToList(entries)
+        for e in entries:
+            authors = ''
+            for a in e[3]:
+                authors += a + ', '
+            authors = authors[:-2]
+            e[3] = authors
         return render_template('library.html', lib = entries, CLIENT_ID = docs.CLIENT_ID, REDIRECT_URI = docs.REDIRECT_URI)
 
 if __name__ == "__main__":
