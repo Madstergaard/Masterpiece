@@ -16,6 +16,12 @@ form {
     display: inline-block; 
 }
 
+.crop {
+    height: 50%;
+    width: 50%;
+    vertical-align: middle;
+}
+
 .nav2 {
     border: 0em;
     background-color: transparent;
@@ -95,3 +101,4 @@ h1 {
     opacity: 1;
   }
 }
+
