@@ -325,7 +325,7 @@ def getUserDocs(userID):
     docs = []
     db = sqlite3.connect("data/database.db")
     c = db.cursor()
-    cmd = "SELECT title, content, description, coverURL FROM docs WHERE userID = %d;"%(int(userID))
+    cmd = "SELECT title, description, coverURL, authors, userID FROM docs WHERE userID = %d;"%(int(userID))
     sel = c.execute(cmd)
     for record in sel:
         docs.append(record)
