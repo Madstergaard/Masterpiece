@@ -5,7 +5,8 @@ import json
 
 app = Flask(__name__)
 app.secret_key = '95c7fbca92ac5083afda62a564a3d014fc3b72c9140e3cb99ea6bf12'
-agent = apiai.ApiAI('5294825b21dc4746851ba49e25ff909b') # client access token
+client_access_token = json.loads(open('keys.json').read())['apiai']['client_access_token']
+agent = apiai.ApiAI(client_access_token) # client access token
 
 writingType = ''
 topic = ''
