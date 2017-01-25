@@ -40,90 +40,97 @@
                     <form action="/logout/">
                         <input type="submit" class="btn btn2 b1" value="Logout">
                     </form>
-                    <!--LOGIN BUTTON-->
-                <div class="g-signin2" id="sign-in-button" data-onsuccess="onSignIn" >
-    <script>
-      function onSignIn(googleUser) {
-        gapi.load('auth2', function() {
-        auth2 = gapi.auth2.init({
-          client_id: '{{ CLIENT_ID }}',
-          fetch_basic_profile: false,
-          scope: 'profile email https://www.googleapis.com/auth/drive.install https://www.googleapis.com/auth/drive.file'
-          });
-          // Sign the user in, and then retrieve their ID.
-          auth2.signIn().then(function() {
-          console.log(auth2.currentUser.get().getId());
-          });
-        });
-
-        var button = document.getElementById("sign-in-button")
-        button.AddEventListener("click", GoogleAuth.signIn())
-        // Useful data for your client-side scripts:
-        if (auth2.isSignedIn.get()) {
-          var profile = googleUser.getBasicProfile();
-          console.log("ID: " + profile.getId()); // Don't send this directly to your server!
-          console.log('Full Name: ' + profile.getName());
-          console.log('Given Name: ' + profile.getGivenName());
-          console.log('Family Name: ' + profile.getFamilyName());
-          console.log("Image URL: " + profile.getImageUrl());
-          console.log("Email: " + profile.getEmail());
-        }
-
-        // The ID token you need to pass to your backend:
-        var id_token = googleUser.getAuthResponse().id_token;
-        var xhr = new XMLHttpRequest();
-        xhr.open('POST', 'https://localhost:5000/signIn');
-        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-        xhr.onload = function() {
-          console.log('Signed in as: ' + xhr.responseText);
-        };
-        xhr.send('idtoken=' + id_token);
-      };
-    </script>
+                </ul>
+            </div>
+        </nav>
     </div>
-            </ul>
-         </div>
-      </nav>
-      </div>
 
-<<<<<<< HEAD
+                    
+
+
     <div class="container-fluid title"> 
-=======
-
-    <div class="container-fluid title">
->>>>>>> 403ab11f06b95db4d161616aaaf93176afa68403
         <h1>Document Name</h1>
         <br>
     </div>
 
-<<<<<<< HEAD
+
 
     <div>
-        <p> Please log in with Google to start writing your masterpiece </p>
+        <center> Please log in with Google to start writing your masterpiece. </center>
     </div>
 
-    
-      
-=======
+    <br>
+
     <center>
+
+    <!--LOGIN BUTTON-->
+    <div class="g-signin2 container-fluid" id="sign-in-button" data-onsuccess="onSignIn" >
+        <script>
+          function onSignIn(googleUser) {
+            gapi.load('auth2', function() {
+            auth2 = gapi.auth2.init({
+              client_id: '{{ CLIENT_ID }}',
+              fetch_basic_profile: false,
+              scope: 'profile email https://www.googleapis.com/auth/drive.install https://www.googleapis.com/auth/drive.file'
+              });
+              // Sign the user in, and then retrieve their ID.
+              auth2.signIn().then(function() {
+              console.log(auth2.currentUser.get().getId());
+              });
+            });
+
+            var button = document.getElementById("sign-in-button")
+            button.AddEventListener("click", GoogleAuth.signIn())
+            // Useful data for your client-side scripts:
+            if (auth2.isSignedIn.get()) {
+              var profile = googleUser.getBasicProfile();
+              console.log("ID: " + profile.getId()); // Don't send this directly to your server!
+              console.log('Full Name: ' + profile.getName());
+              console.log('Given Name: ' + profile.getGivenName());
+              console.log('Family Name: ' + profile.getFamilyName());
+              console.log("Image URL: " + profile.getImageUrl());
+              console.log("Email: " + profile.getEmail());
+            }
+
+            // The ID token you need to pass to your backend:
+            var id_token = googleUser.getAuthResponse().id_token;
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', 'https://localhost:5000/signIn');
+            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+            xhr.onload = function() {
+              console.log('Signed in as: ' + xhr.responseText);
+            };
+            xhr.send('idtoken=' + id_token);
+          };
+        </script>
+    </div>
+            
+    <br>
+    <br>
+
+    <div>
+        <center> To get your creative juices flowing, feel free to utilize the chatbot. </center>
+    </div>
+
+    <br>
+
     <div class="container-fluid">
       <a data-placement="right" data-toggle="tooltip" title="Click me to access your own brainstorming Chatbot!" class="btn btn-default" href="https://console.api.ai/api-client/demo/embedded/ba6a68aa-6105-4838-ae99-cbc2e0e244b1" target="popup" onclick="window.open('https://console.api.ai/api-client/demo/embedded/ba6a68aa-6105-4838-ae99-cbc2e0e244b1','name','width=400,height=600')">
           <span class="glyphicon glyphicon-comment" aria-hidden="true"></span> Chatbot</a>
 
     </div> </center>
 
->>>>>>> 403ab11f06b95db4d161616aaaf93176afa68403
+
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-<<<<<<< HEAD
+
     <script src="../static/js/home.js"></script>
     <script src="https://apis.google.com/js/platform.js" async defer></script>
   <script src="https://apis.google.com/js/api.js" async defer></script>
   </body>
 </html>
-=======
     <script src="/../static/js/home.js"></script>
     <script>
     $(document).ready(function(){
@@ -133,4 +140,4 @@
 
     </body>
 </html>
->>>>>>> 403ab11f06b95db4d161616aaaf93176afa68403
+

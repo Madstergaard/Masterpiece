@@ -139,17 +139,6 @@ def doc(author, title):
     if not isLoggedIn():
         return redirect(url_for("login"))
     else:
-<<<<<<< HEAD
-        '''
-        ogAuthor = getUID(author)
-        doc = getContent(title, ogAuthor)
-        privacy = getStatus(title, ogAuthor)
-        description = getDescription(title, ogAuthor)
-        authors = getAuthors(title, ogAuthor)
-        # if doc is private, check if authorExists(title, ogAuthor, session['username'])
-        '''
-        return render_template('doc.html', CLIENT_ID = docs.CLIENT_ID, REDIRECT_URI = docs.REDIRECT_URI)
-=======
         ogAuthor = accounts.getUID(author)
         #print ogAuthor
         doc = accounts.getContent(title, ogAuthor)
@@ -162,12 +151,11 @@ def doc(author, title):
         #print authors
         if privacy == 'private':
             if accounts.authorExists(title, ogAuthor, session['username']):
-                return render_template('doc.html', title = title, doc = doc, privacy = privacy, description = description, authors = authors)
+                return render_template('doc.html', title = title, doc = doc, privacy = privacy, description = description, authors = authors, CLIENT_ID = docs.CLIENT_ID, REDIRECT_URI = docs.REDIRECT_URI)
             else:
-                return render_template('doc.html', msg = 'You don\'t have access to this document.')
+                return render_template('doc.html', msg = 'You don\'t have access to this document.', CLIENT_ID = docs.CLIENT_ID, REDIRECT_URI = docs.REDIRECT_URI)
         # if doc is public
-        return render_template('doc.html', title = title, doc = doc, privacy = privacy, description = description, authors = authors)
->>>>>>> 403ab11f06b95db4d161616aaaf93176afa68403
+        return render_template('doc.html', title = title, doc = doc, privacy = privacy, description = description, authors = authors, CLIENT_ID = docs.CLIENT_ID, REDIRECT_URI = docs.REDIRECT_URI)
 
 @app.route("/workshop/")
 def workshop():
