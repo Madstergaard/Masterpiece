@@ -1,9 +1,6 @@
 from flask import Flask, render_template, session, redirect, url_for, request
 from utils import accounts, initTables, docs, info
 from json import loads, dumps
-from apiclient import discovery
-from oauth2client import client
-import httplib2
 
 
 app = Flask(__name__)
@@ -18,7 +15,24 @@ def isLoggedIn():
 
 @app.route('/')
 def index():
-  return render_template('home2.html', CLIENT_ID = docs.CLIENT_ID, REDIRECT_URI = docs.REDIRECT_URI)
+    '''
+    # Check if logged in
+    if 'access_token' in session:
+        # Refresh access token
+        print "REFRESHING TOKEN"
+        session['access_token'] = auth.refresh(session['refresh_token'])
+        return render_template(
+            'dashboard.html',
+            logged_in = True,
+            #artist_data = artist_data,
+            event_list = event_list
+        )
+    else:
+        # Authentication url is a Spotify page
+        auth_url = auth.authentication_url()
+        return render_template('dashboard.html', logged_in = False, auth_url=auth_url)
+    '''        
+    return render_template('home.html', CLIENT_ID = docs.CLIENT_ID, REDIRECT_URI = docs.REDIRECT_URI)
 
 @app.route('/signIn/')
 

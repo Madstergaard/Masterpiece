@@ -3,9 +3,11 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="google-signin-client_id" content="{{ CLIENT_ID }}">
-    <meta name="google-signin-scope" content="profile email">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="google-signin-scope" content="profile email https://www.googleapis.com/auth/drive.install https://www.googleapis.com/auth/drive.file">
+  <meta name="google-signin-client_id" content="{{ CLIENT_ID }}">
+  <meta name="google-signin-redirect_uri" content="{{ REDIRECT_URI }}">
+  <script src="https://apis.google.com/js/platform.js" async defer></script>
+  <script src="https://apis.google.com/js/api.js" async defer></script>
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <title> masterpiece</title>
 
@@ -28,32 +30,59 @@
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <!--LOGIN BUTTON-->
-                <div id="my-signin2" class="g-signin2" data-width="300" data-height="200" data-longtitle="true">
-                 <script>
-                    function onSuccess(googleUser) {
-                    console.log('Logged in as: ' + googleUser.getBasicProfile().getName());
-                    }
-                    function onFailure(error) {
-                      console.log(error);
-                    }
-                    function renderButton() {
-                      gapi.signin2.render('my-signin2', {
-                        'scope': 'profile email',
-                        'width': 192,
-                        'height': 40,
-                        'longtitle': true,
-                        'theme': 'dark',
-                        'onsuccess': onSuccess,
-                        'onfailure': onFailure
-                      });
-                    }
-                  </script>
-               </div>
+                <div class="g-signin2" id="sign-in-button" data-onsuccess="onSignIn" >
+    <script>
+      function onSignIn(googleUser) {
+        gapi.load('auth2', function() {
+        auth2 = gapi.auth2.init({
+          client_id: '{{ CLIENT_ID }}',
+          fetch_basic_profile: false,
+          scope: 'profile email https://www.googleapis.com/auth/drive.install https://www.googleapis.com/auth/drive.file'
+          });
+          // Sign the user in, and then retrieve their ID.
+          auth2.signIn().then(function() {
+          console.log(auth2.currentUser.get().getId());
+          });
+        });
+
+        var button = document.getElementById("sign-in-button")
+        button.AddEventListener("click", GoogleAuth.signIn())
+        // Useful data for your client-side scripts:
+        if (auth2.isSignedIn.get()) {
+          var profile = googleUser.getBasicProfile();
+          console.log("ID: " + profile.getId()); // Don't send this directly to your server!
+          console.log('Full Name: ' + profile.getName());
+          console.log('Given Name: ' + profile.getGivenName());
+          console.log('Family Name: ' + profile.getFamilyName());
+          console.log("Image URL: " + profile.getImageUrl());
+          console.log("Email: " + profile.getEmail());
+        }
+
+        // The ID token you need to pass to your backend:
+        var id_token = googleUser.getAuthResponse().id_token;
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', 'https://localhost:5000/signIn');
+        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        xhr.onload = function() {
+          console.log('Signed in as: ' + xhr.responseText);
+        };
+        xhr.send('idtoken=' + id_token);
+      };
+    </script>
+    </div>
             </ul>
          </div>
       </nav> 
 
-
+<a href="#" onclick="signOut();">Sign out</a>
+    <script>
+      function signOut() {
+        var auth2 = gapi.auth2.getAuthInstance();
+        auth2.signOut().then(function () {
+        console.log('User signed out.');
+        });
+      }
+    </script>
 
 <!--CAROUSEL-->
     <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">

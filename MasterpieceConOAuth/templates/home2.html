@@ -1,6 +1,6 @@
 <html>
 <head>
-  <meta name="google-signin-scope" content="profile email">
+  <meta name="google-signin-scope" content="profile email https://www.googleapis.com/auth/drive.install https://www.googleapis.com/auth/drive.file">
   <meta name="google-signin-client_id" content="{{ CLIENT_ID }}">
   <meta name="google-signin-redirect_uri" content="{{ REDIRECT_URI }}">
   <script src="https://apis.google.com/js/platform.js" async defer></script>
@@ -14,7 +14,7 @@
         auth2 = gapi.auth2.init({
           client_id: '{{ CLIENT_ID }}',
           fetch_basic_profile: false,
-          scope: 'profile email'
+          scope: 'profile email https://www.googleapis.com/auth/drive.install https://www.googleapis.com/auth/drive.file'
           });
           // Sign the user in, and then retrieve their ID.
           auth2.signIn().then(function() {
@@ -46,8 +46,10 @@
         xhr.send('idtoken=' + id_token);
       };
     </script>
-  </div>
+    </div>
+    
   <br>
+
   <a href="#" onclick="signOut();">Sign out</a>
     <script>
       function signOut() {

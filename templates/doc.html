@@ -5,6 +5,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="google-signin-scope" content="profile email https://www.googleapis.com/auth/drive.install https://www.googleapis.com/auth/drive.file">
+  <meta name="google-signin-client_id" content="{{ CLIENT_ID }}">
+  <meta name="google-signin-redirect_uri" content="{{ REDIRECT_URI }}">
+  
     <title> masterpiece</title>
 
     <!-- Bootstrap -->
@@ -43,21 +47,70 @@
                     <form action="/logout/">
                         <input type="submit" class="btn btn2 b1" value="Logout">     
                     </form>
+                    <!--LOGIN BUTTON-->
+                <div class="g-signin2" id="sign-in-button" data-onsuccess="onSignIn" >
+    <script>
+      function onSignIn(googleUser) {
+        gapi.load('auth2', function() {
+        auth2 = gapi.auth2.init({
+          client_id: '{{ CLIENT_ID }}',
+          fetch_basic_profile: false,
+          scope: 'profile email https://www.googleapis.com/auth/drive.install https://www.googleapis.com/auth/drive.file'
+          });
+          // Sign the user in, and then retrieve their ID.
+          auth2.signIn().then(function() {
+          console.log(auth2.currentUser.get().getId());
+          });
+        });
+
+        var button = document.getElementById("sign-in-button")
+        button.AddEventListener("click", GoogleAuth.signIn())
+        // Useful data for your client-side scripts:
+        if (auth2.isSignedIn.get()) {
+          var profile = googleUser.getBasicProfile();
+          console.log("ID: " + profile.getId()); // Don't send this directly to your server!
+          console.log('Full Name: ' + profile.getName());
+          console.log('Given Name: ' + profile.getGivenName());
+          console.log('Family Name: ' + profile.getFamilyName());
+          console.log("Image URL: " + profile.getImageUrl());
+          console.log("Email: " + profile.getEmail());
+        }
+
+        // The ID token you need to pass to your backend:
+        var id_token = googleUser.getAuthResponse().id_token;
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', 'https://localhost:5000/signIn');
+        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        xhr.onload = function() {
+          console.log('Signed in as: ' + xhr.responseText);
+        };
+        xhr.send('idtoken=' + id_token);
+      };
+    </script>
+    </div>
             </ul>
          </div>
       </nav> 
       </div>
 
-
     <div class="container-fluid title"> 
         <h1>Document Name</h1>
         <br>
     </div>
+
+
+    <div>
+        <p> Please log in with Google to start writing your masterpiece </p>
+    </div>
+
+    
       
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
     <script src="../static/js/home.js"></script>
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+  <script src="https://apis.google.com/js/api.js" async defer></script>
   </body>
 </html>

@@ -1,6 +1,6 @@
 from flask import Flask, render_template, session, redirect, url_for, request
 from apiai import apiai
-from utils import accounts, initTables, info
+from utils import accounts, initTables, info, docs
 import json
 
 app = Flask(__name__)
@@ -88,7 +88,7 @@ def login():
                     return redirect(url_for("library"))
                 else:
                     msg = 'User already exists'
-        return render_template('home.html', msg = msg)
+        return render_template('home.html', msg = msg, CLIENT_ID = docs.CLIENT_ID, REDIRECT_URI = docs.REDIRECT_URI)
 
 @app.route("/logout/")
 def logout():
@@ -125,7 +125,7 @@ def createDoc():
             accounts.addDoc(title, content, userID, privacy, comments, description, image, authors)
             author = str(session['username'])
             title = str(title)
-            return redirect(url_for("doc", author = author, title = title))
+            return redirect(url_for("doc", author = author, title = title, CLIENT_ID = docs.CLIENT_ID, REDIRECT_URI = docs.REDIRECT_URI))
 
 @app.route("/<author>/<title>/")
 def doc(author, title):
@@ -140,7 +140,7 @@ def doc(author, title):
         authors = getAuthors(title, ogAuthor)
         # if doc is private, check if authorExists(title, ogAuthor, session['username'])
         '''
-        return render_template('doc.html')
+        return render_template('doc.html', CLIENT_ID = docs.CLIENT_ID, REDIRECT_URI = docs.REDIRECT_URI)
 
 @app.route("/workshop/")
 def workshop():
@@ -159,7 +159,7 @@ def library():
     else:
         entries = accounts.getLibraryInfo()
         print entries
-        return render_template('library.html', lib = entries)
+        return render_template('library.html', lib = entries, CLIENT_ID = docs.CLIENT_ID, REDIRECT_URI = docs.REDIRECT_URI)
 
 if __name__ == "__main__":
     app.debug = True
