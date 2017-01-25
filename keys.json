@@ -1,1 +1,22 @@
-{"web":{"client_id":"313115836983-v7lcbcg0jd7g65gk9mrtrbtl837b429a.apps.googleusercontent.com","project_id":"masterpiece-155119","auth_uri":"https://accounts.google.com/o/oauth2/auth","token_uri":"https://accounts.google.com/o/oauth2/token","auth_provider_x509_cert_url":"https://www.googleapis.com/oauth2/v1/certs","client_secret":"TODo9KW_W2HByS72aUCvK02Y", "redirect_uris":["http://localhost:5000/home/","https://localhost:5000/home/"], "javascript_origins":["http://localhost:5000","https://localhost:5000"]}}
+{
+  "web": {
+    "client_id": "313115836983-v7lcbcg0jd7g65gk9mrtrbtl837b429a.apps.googleusercontent.com",
+    "project_id": "masterpiece-155119",
+    "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+    "token_uri": "https://accounts.google.com/o/oauth2/token",
+    "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+    "client_secret": "TODo9KW_W2HByS72aUCvK02Y",
+    "redirect_uris": [
+      "http://localhost:5000/home/",
+      "https://localhost:5000/home/"
+    ],
+    "javascript_origins": [
+      "http://localhost:5000",
+      "https://localhost:5000"
+    ]
+  },
+  "apiai": {
+    "client_access_token": "5294825b21dc4746851ba49e25ff909b",
+    "developer_access_token": "276155122018415e8638231b15739a89"
+  }
+}
