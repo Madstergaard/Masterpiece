@@ -113,6 +113,10 @@ def createDoc():
             userID = session['userID']
             comments = ""
             authors = session['username'] + ";;;"
+            
+            if len(title) < 1 or len(description) < 1 or len(image) < 1:
+                return render_template('create.html', msg = "Missing fields. Please complete all the fields in the form.")
+            
             accounts.addDoc(title, content, userID, privacy, comments, description, image, authors)
             author = str(session['username'])
             title = str(title)
