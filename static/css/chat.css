@@ -1,0 +1,29 @@
+body { 
+    width: 350px; 
+    margin: 0 auto; 
+    text-align: center; 
+    margin-top: 20px; 
+}
+
+input { 
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    width: 100%; 
+}
+
+button { 
+    width: 50px; 
+}
+     
+textarea { 
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    width: 100%; 
+}
+   
+span {
+    font-size: 2em;
+    color: navy;
+}
