@@ -78,6 +78,9 @@ jessicaY -- 2017-01-19 14:37
 	fixed library info function
 	added get functions for the doc route
 
+maddieO -- 2017-01-19 15:00
+	got sign-in with google to work!
+
 nancyC -- 2017-01-19 16:00
        fixed nav bar links
        added message alert for faulty login
@@ -97,6 +100,13 @@ jessicaY -- 2017-01-22 17:37
 	added working chatbot
 	fixed the image issue for bad image links
 
+maddieO -- 2017-01-22 21:00
+	integrated sign in button with rest of site, research on google http requests
+
 nancyC -- 2017-01-24 18:00
        fixed nav bar links
        added chatbot popup link to doc.html
+
+maddieO -- 2017-01-25 21:00
+	decided after watching every tutorial and trying many many different ways that I wouldn't be able to understand the Google Drive API enough to finish on time. We switched to plain text
+
