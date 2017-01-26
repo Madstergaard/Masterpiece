@@ -1,0 +1,11 @@
+#writing {
+    width: 900px;
+    height: 900px;
+    font-family:"Times New Roman", Times, serif;  
+    font-size: 17px;  
+    padding: 2em;
+}
+
+textarea:focus, input:focus{
+    outline: none;
+}
