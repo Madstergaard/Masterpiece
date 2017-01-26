@@ -1,0 +1,19 @@
+# Changes Made to the Masterpiece Design Document:
+
+## Choice of APIs ##
+- From Goodreads to Wikiquote
+    - Wikiquote provides a greater variety of information and more detailed information. The functionality of Goodreads was too limited and its documentation was not that great for our usage.
+- From IBM Watson Conversation Service to API AI 
+    - While both APIs offered very similar things, API AI’s documentation and tutorials were more helpful for a beginner.
+## Routing ##
+- After signing in, user goes to library instead of workshop.
+    - There are more documents to look at in library, workshop is empty as a new user)
+- Instead of having the chatbot on the doc route (along with the actual document), it has a separate route, which can be accessed through a button.
+    - It was difficult to put them on the same page.
+## Features ##
+- No procrastination block
+    - There wasn’t enough time to work on it because attempting to integrate Google Docs took longer than expected.
+- Chatbot limitations
+    - There was nothing in the API that allowed the bot to recognize book titles, so there will be no quote if you search for a book.
+- No Google Docs
+    - The documentation was too limited for our purposes. At most, we were able to get the login to work.
