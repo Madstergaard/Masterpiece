@@ -1,6 +1,6 @@
 from flask import Flask, render_template, session, redirect, url_for, request, jsonify
 from apiai import apiai
-from utils import accounts, initTables, info, docs
+from utils import accounts, initTables, info
 import json
 
 app = Flask(__name__)
@@ -131,19 +131,20 @@ def createDoc():
             userID = session['userID']
             comments = ""
             authors = session['username'] + ";;;"
-            
+
             if len(title) < 1 or len(description) < 1 or len(image) < 1:
                 return render_template('create.html', msg = "Missing fields. Please complete all the fields in the form.")
-            
+
             accounts.addDoc(title, content, userID, privacy, comments, description, image, authors)
             author = str(session['username'])
+            print author
             title = str(title)
             return redirect(url_for("doc", author = author, title = title))
 
 @app.route("/temp/")
 def temp():
     return render_template('chat.html')
-        
+
 @app.route("/chat/", methods = ['POST'])
 def chat():
     userInput = request.form['input']
@@ -160,32 +161,47 @@ def chat():
         print saveType(userInput)
     if result['action'] == 'saveTopic':
         botResponse += saveTopic(userInput)
-        
-    return jsonify({'botOutput' : botResponse }) 
-        
+
+    return jsonify({'botOutput' : botResponse })
+
 @app.route("/<author>/<title>/")
 def doc(author, title):
     if not isLoggedIn():
         return redirect(url_for("login"))
     else:
-        print "author" + author
+        a = author
+        #print author
         ogAuthor = accounts.getUID(author)
         #print ogAuthor
         doc = accounts.getContent(title, ogAuthor)
-        #print doc
+        print doc
         privacy = accounts.getStatus(title, ogAuthor)
         #print privacy
         description = accounts.getDescription(title, ogAuthor)
         #print description
         authors = stringToList(str(accounts.getAuthors(title, ogAuthor)))
         #print authors
+        content = accounts.getContent(title, ogAuthor)
+        print content
         if privacy == 'private':
             if accounts.authorExists(title, ogAuthor, session['username']):
-                return render_template('doc.html', title = title, doc = doc, privacy = privacy, description = description, authors = authors)
+                return render_template('doc.html', author = a, title = title, doc = doc, privacy = privacy, description = description, authors = authors, content = content)
             else:
                 return render_template('doc.html', msg = 'You don\'t have access to this document.')
         # if doc is public
-        return render_template('doc.html', title = title, doc = doc, privacy = privacy, description = description, authors = authors)
+        return render_template('doc.html', author = a, title = title, doc = doc, privacy = privacy, description = description, authors = authors, content = content)
+
+@app.route("/<author>/<title>/save", methods = ['POST'])
+def save(author, title):
+    if not isLoggedIn():
+        return redirect(url_for("login"))
+    else:
+        a = author
+        newContent = str(request.form['textInput'])
+        userID = session['userID']
+        accounts.updateContent(title, userID, newContent)
+        doc = accounts.getContent(title, userID)
+        return render_template('doc.html', author = a, title = title, doc = doc, msg = 'Successfully saved.')
 
 @app.route("/workshop/")
 def workshop():
