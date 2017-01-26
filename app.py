@@ -179,13 +179,14 @@ def doc(author, title):
         #print description
         authors = stringToList(str(accounts.getAuthors(title, ogAuthor)))
         #print authors
+        ID = docs.createDoc_returnID()
         if privacy == 'private':
             if accounts.authorExists(title, ogAuthor, session['username']):
-                return render_template('doc.html', title = title, doc = doc, privacy = privacy, description = description, authors = authors, CLIENT_ID = docs.CLIENT_ID, REDIRECT_URI = docs.REDIRECT_URI)
+                return render_template('doc.html', title = title, doc = doc, privacy = privacy, description = description, authors = authors, CLIENT_ID = docs.CLIENT_ID, REDIRECT_URI = docs.REDIRECT_URI, ID=ID)
             else:
                 return render_template('doc.html', msg = 'You don\'t have access to this document.', CLIENT_ID = docs.CLIENT_ID, REDIRECT_URI = docs.REDIRECT_URI)
         # if doc is public
-        return render_template('doc.html', title = title, doc = doc, privacy = privacy, description = description, authors = authors, CLIENT_ID = docs.CLIENT_ID, REDIRECT_URI = docs.REDIRECT_URI)
+        return render_template('doc.html', title = title, doc = doc, privacy = privacy, description = description, authors = authors, CLIENT_ID = docs.CLIENT_ID, REDIRECT_URI = docs.REDIRECT_URI, ID=ID)
 
 @app.route("/workshop/")
 def workshop():

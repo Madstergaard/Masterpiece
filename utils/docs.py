@@ -1,5 +1,5 @@
 import json 
-import requests 
+import requests
 import base64 
 import urllib 
 import uuid 
@@ -25,19 +25,15 @@ GOOGLE_SCOPES = "profile email https://www.googleapis.com/auth/drive.install htt
 
 
 
-# Storing an API token ---------------------------vv--------------------------
+# List Files ---------------------------vv--------------------------
 
-store = file.Storage('storage.json')
-credz = store.get()
-if not credz or credz.invalid:
-	flow = client.flow_from_clientsecrets('../keys.json', GOOGLE_SCOPES)
-	credz = tools.run(flow, store)
 
-SERVICE = build('drive', 'v2', http=credz.authorise(httplib.Http()))
-files = SERVICE.files().list().execute().get('items', [])
-for f in files:
-	print f['title'], f['mimeType']
 
 # Create doc ---------------------------vv--------------------------
 
-#
+def createDoc_returnID():
+	r = requests.post("https://www.googleapis.com/upload/drive/v3/files", data = {'uploadType':'multipart'})
+	return r["id"]
+
+
+
