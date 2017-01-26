@@ -181,13 +181,15 @@ def doc(author, title):
         #print description
         authors = stringToList(str(accounts.getAuthors(title, ogAuthor)))
         #print authors
+        content = accounts.getContent(title, ogAuthor)
+        print content
         if privacy == 'private':
             if accounts.authorExists(title, ogAuthor, session['username']):
-                return render_template('doc.html', title = title, doc = doc, privacy = privacy, description = description, authors = authors)
+                return render_template('doc.html', author = a, title = title, doc = doc, privacy = privacy, description = description, authors = authors, content = content)
             else:
                 return render_template('doc.html', msg = 'You don\'t have access to this document.')
         # if doc is public
-        return render_template('doc.html', author = a, title = title, doc = doc, privacy = privacy, description = description, authors = authors)
+        return render_template('doc.html', author = a, title = title, doc = doc, privacy = privacy, description = description, authors = authors, content = content)
 
 @app.route("/<author>/<title>/save", methods = ['POST'])
 def save(author, title):
@@ -198,6 +200,7 @@ def save(author, title):
         newContent = str(request.form['textInput'])
         userID = session['userID']
         accounts.updateContent(title, userID, newContent)
+        doc = accounts.getContent(title, userID)
         return render_template('doc.html', author = a, title = title, doc = doc, msg = 'Successfully saved.')
 
 @app.route("/workshop/")
