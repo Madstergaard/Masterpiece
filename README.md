@@ -4,9 +4,6 @@ alMONd JOY - Nancy Cao, Maddie Ostergaard, Jessica Yang (Project Manager)
 ## Installation Instructions: ##
 - Clone the repository.
 - Install:
-    - requests
-    - apiclient
-    - oauth2client
     - apiai
 - Run.
 
