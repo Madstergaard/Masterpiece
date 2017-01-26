@@ -1,6 +1,6 @@
 from flask import Flask, render_template, session, redirect, url_for, request, jsonify
 from apiai import apiai
-#from utils import accounts, initTables, info, docs
+from utils import accounts, initTables, info, docs
 import json
 
 app = Flask(__name__)
