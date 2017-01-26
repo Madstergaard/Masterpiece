@@ -137,6 +137,7 @@ def createDoc():
 
             accounts.addDoc(title, content, userID, privacy, comments, description, image, authors)
             author = str(session['username'])
+            print author
             title = str(title)
             return redirect(url_for("doc", author = author, title = title))
 
@@ -168,11 +169,12 @@ def doc(author, title):
     if not isLoggedIn():
         return redirect(url_for("login"))
     else:
-        print "author" + author
+        a = author
+        #print author
         ogAuthor = accounts.getUID(author)
         #print ogAuthor
         doc = accounts.getContent(title, ogAuthor)
-        #print doc
+        print doc
         privacy = accounts.getStatus(title, ogAuthor)
         #print privacy
         description = accounts.getDescription(title, ogAuthor)
@@ -185,7 +187,18 @@ def doc(author, title):
             else:
                 return render_template('doc.html', msg = 'You don\'t have access to this document.')
         # if doc is public
-        return render_template('doc.html', title = title, doc = doc, privacy = privacy, description = description, authors = authors)
+        return render_template('doc.html', author = a, title = title, doc = doc, privacy = privacy, description = description, authors = authors)
+
+@app.route("/<author>/<title>/save", methods = ['POST'])
+def save(author, title):
+    if not isLoggedIn():
+        return redirect(url_for("login"))
+    else:
+        a = author
+        newContent = str(request.form['textInput'])
+        userID = session['userID']
+        accounts.updateContent(title, userID, newContent)
+        return render_template('doc.html', author = a, title = title, doc = doc, msg = 'Successfully saved.')
 
 @app.route("/workshop/")
 def workshop():
