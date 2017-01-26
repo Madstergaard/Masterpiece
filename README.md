@@ -1,6 +1,9 @@
 # Masterpiece
 alMONd JOY - Nancy Cao, Maddie Ostergaard, Jessica Yang (Project Manager)
 
+## Link to Presentation: ##
+- https://youtu.be/2WUAuk5XQVE
+
 ## Installation Instructions: ##
 - Clone the repository.
 - Install:

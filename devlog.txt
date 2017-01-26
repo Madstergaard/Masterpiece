@@ -144,3 +144,6 @@ jessicaY -- 2017-01-26 03:37
 
 jessicaY -- 2017-01-26 04:18
 	fixed saved content to account for ‘ and “
+
+maddieO -- 2017-1-26 5:53
+	finished video, published to YouTube
