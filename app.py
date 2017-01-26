@@ -169,12 +169,7 @@ def doc(author, title):
     if not isLoggedIn():
         return redirect(url_for("login"))
     else:
-        if author == 'workshop' or author == 'library':
-            a = str(session['username'])
-            print a
-        else:
-            a = author
-            print a
+        a = author
         ogAuthor = accounts.getUID(author)
         #print ogAuthor
         doc = accounts.getContent(title, ogAuthor)
@@ -199,10 +194,12 @@ def save(author, title):
         return redirect(url_for("login"))
     else:
         a = author
-        newContent = str(request.form['textInput'])
-        userID = session['userID']
-        accounts.updateContent(title, userID, newContent)
-        doc = accounts.getContent(title, userID)
+        ogAuthor = accounts.getUID(a)
+        newAuthor = session['username']
+        accounts.addAuthor(title, ogAuthor, newAuthor)
+        newContent = cleanString(str(request.form['textInput']))
+        accounts.updateContent(title, ogAuthor, newContent)
+        doc = accounts.getContent(title, ogAuthor)
         return render_template('doc.html', author = a, title = title, doc = doc, msg = 'Successfully saved.')
 
 @app.route("/workshop/")
