@@ -201,7 +201,7 @@ def rmComment(title, userID, comment):
 
 #rmComment("coffee",1,"i agree")
 
-# returns doc link
+# returns doc content
 def getContent(title, userID):
     db = sqlite3.connect("data/database.db")
     c = db.cursor()

@@ -169,27 +169,29 @@ def doc(author, title):
     if not isLoggedIn():
         return redirect(url_for("login"))
     else:
-        a = author
-        #print author
+        if author == 'workshop' or author == 'library':
+            a = str(session['username'])
+            print a
+        else:
+            a = author
+            print a
         ogAuthor = accounts.getUID(author)
         #print ogAuthor
         doc = accounts.getContent(title, ogAuthor)
-        print doc
+        #print doc
         privacy = accounts.getStatus(title, ogAuthor)
         #print privacy
         description = accounts.getDescription(title, ogAuthor)
         #print description
         authors = stringToList(str(accounts.getAuthors(title, ogAuthor)))
         #print authors
-        content = accounts.getContent(title, ogAuthor)
-        print content
         if privacy == 'private':
             if accounts.authorExists(title, ogAuthor, session['username']):
-                return render_template('doc.html', author = a, title = title, doc = doc, privacy = privacy, description = description, authors = authors, content = content)
+                return render_template('doc.html', author = a, title = title, doc = doc, privacy = privacy, description = description, authors = authors)
             else:
                 return render_template('doc.html', msg = 'You don\'t have access to this document.')
         # if doc is public
-        return render_template('doc.html', author = a, title = title, doc = doc, privacy = privacy, description = description, authors = authors, content = content)
+        return render_template('doc.html', author = a, title = title, doc = doc, privacy = privacy, description = description, authors = authors)
 
 @app.route("/<author>/<title>/save", methods = ['POST'])
 def save(author, title):
@@ -204,6 +206,7 @@ def save(author, title):
         return render_template('doc.html', author = a, title = title, doc = doc, msg = 'Successfully saved.')
 
 @app.route("/workshop/")
+# title, description, image, authors, userID
 def workshop():
     if not isLoggedIn():
         return redirect(url_for("login"))
@@ -216,10 +219,11 @@ def workshop():
                 authors += a + ', '
             authors = authors[:-2]
             e[3] = authors
-        return render_template('workshop.html', work = docs)
+        author = str(session['username'])
+        return render_template('workshop.html', work = docs, author = author)
 
 @app.route("/library/")
-# title, description, URL to book cover image, author names
+# title, description, image, authors, userID
 def library():
     if not isLoggedIn():
         return redirect(url_for("login"))
