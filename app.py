@@ -97,7 +97,7 @@ def login():
                     return redirect(url_for("library"))
                 else:
                     msg = 'User already exists'
-        return render_template('home.html', msg = msg, CLIENT_ID = docs.CLIENT_ID, REDIRECT_URI = docs.REDIRECT_URI)
+        return render_template('home.html', msg = msg)
 
 @app.route("/logout/")
 def logout():
@@ -138,7 +138,7 @@ def createDoc():
             accounts.addDoc(title, content, userID, privacy, comments, description, image, authors)
             author = str(session['username'])
             title = str(title)
-            return redirect(url_for("doc", author = author, title = title, CLIENT_ID = docs.CLIENT_ID, REDIRECT_URI = docs.REDIRECT_URI))
+            return redirect(url_for("doc", author = author, title = title))
 
 @app.route("/temp/")
 def temp():
@@ -179,14 +179,13 @@ def doc(author, title):
         #print description
         authors = stringToList(str(accounts.getAuthors(title, ogAuthor)))
         #print authors
-        ID = docs.createDoc_returnID()
         if privacy == 'private':
             if accounts.authorExists(title, ogAuthor, session['username']):
-                return render_template('doc.html', title = title, doc = doc, privacy = privacy, description = description, authors = authors, CLIENT_ID = docs.CLIENT_ID, REDIRECT_URI = docs.REDIRECT_URI, ID=ID)
+                return render_template('doc.html', title = title, doc = doc, privacy = privacy, description = description, authors = authors)
             else:
-                return render_template('doc.html', msg = 'You don\'t have access to this document.', CLIENT_ID = docs.CLIENT_ID, REDIRECT_URI = docs.REDIRECT_URI)
+                return render_template('doc.html', msg = 'You don\'t have access to this document.')
         # if doc is public
-        return render_template('doc.html', title = title, doc = doc, privacy = privacy, description = description, authors = authors, CLIENT_ID = docs.CLIENT_ID, REDIRECT_URI = docs.REDIRECT_URI, ID=ID)
+        return render_template('doc.html', title = title, doc = doc, privacy = privacy, description = description, authors = authors)
 
 @app.route("/workshop/")
 def workshop():
@@ -217,7 +216,7 @@ def library():
                 authors += a + ', '
             authors = authors[:-2]
             e[3] = authors
-        return render_template('library.html', lib = entries, CLIENT_ID = docs.CLIENT_ID, REDIRECT_URI = docs.REDIRECT_URI)
+        return render_template('library.html', lib = entries)
 
 if __name__ == "__main__":
     app.debug = True
