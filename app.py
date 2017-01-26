@@ -1,6 +1,6 @@
 from flask import Flask, render_template, session, redirect, url_for, request, jsonify
 from apiai import apiai
-from utils import accounts, initTables, info, docs
+#from utils import accounts, initTables, info, docs
 import json
 
 app = Flask(__name__)
@@ -131,10 +131,10 @@ def createDoc():
             userID = session['userID']
             comments = ""
             authors = session['username'] + ";;;"
-            
+
             if len(title) < 1 or len(description) < 1 or len(image) < 1:
                 return render_template('create.html', msg = "Missing fields. Please complete all the fields in the form.")
-            
+
             accounts.addDoc(title, content, userID, privacy, comments, description, image, authors)
             author = str(session['username'])
             title = str(title)
@@ -143,7 +143,7 @@ def createDoc():
 @app.route("/temp/")
 def temp():
     return render_template('chat.html')
-        
+
 @app.route("/chat/", methods = ['POST'])
 def chat():
     userInput = request.form['input']
@@ -160,9 +160,9 @@ def chat():
         print saveType(userInput)
     if result['action'] == 'saveTopic':
         botResponse += saveTopic(userInput)
-        
-    return jsonify({'botOutput' : botResponse }) 
-        
+
+    return jsonify({'botOutput' : botResponse })
+
 @app.route("/<author>/<title>/")
 def doc(author, title):
     if not isLoggedIn():
