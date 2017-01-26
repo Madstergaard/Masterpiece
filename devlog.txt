@@ -103,10 +103,44 @@ jessicaY -- 2017-01-22 17:37
 maddieO -- 2017-01-22 21:00
 	integrated sign in button with rest of site, research on google http requests
 
+jessicaY -- 2017-01-23 13:55
+	added function to replace ‘ and “ in strings with ` to prevent errors
+
+jessicaY -- 2017-01-24 17:08
+	added function to split a string to get rid of delimiter
+	tested doc route and made adjustments
+
 nancyC -- 2017-01-24 18:00
        fixed nav bar links
        added chatbot popup link to doc.html
 
+jessicaY -- 2017-01-24 22:38
+	added javascript and route for chatbot to allow backend to send quote info
+
+jessicaY -- 2017-01-25 02:39
+	added code to prevent empty forms from being submitted because the required attribute didn’t work
+	worked on demo video
+
+jessicaY -- 2017-01-25 12:49
+	added function to convert tuples to lists to fix authors display
+
+nancyC -- 2017-01-25 13:00
+	added css for chat.html
+
+jessicaY -- 2017-01-25 13:13
+	edited library and workshop route to fix authors display
+
 maddieO -- 2017-01-25 21:00
 	decided after watching every tutorial and trying many many different ways that I wouldn't be able to understand the Google Drive API enough to finish on time. We switched to plain text
 
+jessicaY -- 2017-01-26 02:33
+	added route to save doc content
+
+jessicaY -- 2017-01-26 02:43
+	added saved doc to textarea
+
+jessicaY -- 2017-01-26 03:37
+	fixed links to docs in library and workshop
+
+jessicaY -- 2017-01-26 04:18
+	fixed saved content to account for ‘ and “
